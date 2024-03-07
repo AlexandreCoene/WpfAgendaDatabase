@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="WpfAgendaDatabase.View.ViewContact"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfAgendaDatabase.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <DataGrid Margin="20,71,20,20" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Identité}" x:Name="DataGridContacts">
+
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="#" Binding="{Binding Idtable1}" Width="20"/>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width=""/>
+                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width=""/>
+                <DataGridTextColumn Header="Email Address" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="Téléphone" Binding="{Binding Numero}" Width="150"/>
+
+                <!-- Add more columns as necessary -->
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button Content="Ajouter" HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Ajouter"/>
+        
+
+        <ContentControl x:Name="MainContent" />
+        <Button Content="Supprimer" HorizontalAlignment="Left" Margin="116,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Supprimer"/>
+
+
+    </Grid>
+</UserControl>
