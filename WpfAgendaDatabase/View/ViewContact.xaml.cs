@@ -13,58 +13,85 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using System.Linq;
 using WpfAgendaDatabase.Agenda_AlexDB;
+using WpfAgendaDatabase.Service.DAO;
 
 namespace WpfAgendaDatabase.View
 {
     public partial class ViewContact : UserControl
     {
         public ObservableCollection<Identité> Identités { get; set; } = new ObservableCollection<Identité>();
+        public DAO_Contact dAO_Contact;
+
 
         public ViewContact()
         {
             InitializeComponent();
+
+            dAO_Contact = new DAO_Contact();
             LoadData();
-            DataGridContacts.ItemsSource = Identités;
             this.DataContext = this;
         }
 
         private void LoadData()
         {
-            using (var context = new AgendaAlexContext())
-            {
-                Identités = new ObservableCollection<Identité>(context.Identités.ToList());
-                DataGridContacts.ItemsSource = Identités;
-            }
+            DataGridContacts.ItemsSource = dAO_Contact.LoadAllContacts();
         }
+
 
         private void Button_Click_Ajouter(object sender, RoutedEventArgs e)
         {
-            ViewAjouter viewAjouter = new ViewAjouter();
-            MainContent.Content = viewAjouter;
+            MainContent.Content = new ViewAjouter();
         }
 
         private void Button_Click_Supprimer(object sender, RoutedEventArgs e)
         {
-            var selectedItem = DataGridContacts.SelectedItem as Identité;
-            if (selectedItem != null)
+            var item = DataGridContacts.SelectedItem as Identité;
+            if (item != null)
             {
-                using (var context = new AgendaAlexContext())
-                {
-                    context.Identités.Remove(selectedItem);
-                    context.SaveChanges();
-                }
-                Identités.Remove(selectedItem); // Supprime l'élément de l'ObservableCollection
-                MessageBox.Show("Contact supprimé avec succès!");
-            }
-            else
-            {
-                MessageBox.Show("Veuillez sélectionner un contact à supprimer.");
+                dAO_Contact.DeleteContact(item);
+                Identités.Remove(item);
+                // Pas besoin de réaffecter ItemsSource, la ObservableCollection s'en charge
             }
         }
 
+        private void DataGridContacts_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var column = e.Column as DataGridBoundColumn; // La colonne éditée
+                if (column != null)
+                {
+                    var bindingPath = (column.Binding as Binding).Path.Path; // Le nom de la propriété liée à la colonne
+                    var textBox = e.EditingElement as TextBox; // La cellule éditée
+                    if (textBox != null)  
+                    {
+                        var editedValue = textBox.Text; // La valeur éditée
+                        var editedItem = e.Row.Item as Identité; // L'élément édité
 
+                        using (var context = new AgendaAlexContext()) 
+                        {
+                            var item = context.Identités.FirstOrDefault(i => i.Idtable1 == editedItem.Idtable1); // L'élément à modifier
+                            if (item != null)
+                            {
+                                // Reflection peut être utilisé ici pour rendre ce code plus générique, cela nécessite l'utilisation du nom de la propriété (bindingPath)
+                                if (bindingPath == "Nom") item.Nom = editedValue;
+                                else if (bindingPath == "Prenom") item.Prenom = editedValue;
+                                else if (bindingPath == "Numero") item.Numero = editedValue;
+                                else if (bindingPath == "Email") item.Email = editedValue;
+                                else if (bindingPath == "Sexe") item.Sexe = editedValue;                              
+                                else if (bindingPath == "VilleDeNaissance") item.VilleDeNaissance = editedValue;
+                                else if (bindingPath == "Adresse") item.Adresse = editedValue;
+
+
+                                context.SaveChanges();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Le bouton Modifier n'est pas nécessaire si les modifications sont faites directement dans le DataGrid
     }
 }
-

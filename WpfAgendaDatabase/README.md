@@ -1,0 +1,1 @@
+Scaffold-DbContext "server=localhost;port=3306;user=root;password=;database=agenda_alex" Pomelo.EntityFrameworkCore.MySql -OutputDir Agenda_AlexDB -f

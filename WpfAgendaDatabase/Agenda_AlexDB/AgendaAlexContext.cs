@@ -29,6 +29,7 @@ public partial class AgendaAlexContext : DbContext
     public virtual DbSet<ToDoList> ToDoLists { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
         => optionsBuilder.UseMySql("server=localhost;port=3306;user=root;database=agenda_alex", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.2.0-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,9 +46,7 @@ public partial class AgendaAlexContext : DbContext
 
             entity.Property(e => e.Idtable1).HasColumnName("idtable1");
             entity.Property(e => e.Adresse).HasMaxLength(45);
-            entity.Property(e => e.DateDeNaissance)
-                .HasMaxLength(45)
-                .HasColumnName("Date de naissance");
+            entity.Property(e => e.DateDeNaissance).HasColumnName("Date de naissance");
             entity.Property(e => e.Email).HasMaxLength(45);
             entity.Property(e => e.Nom).HasMaxLength(45);
             entity.Property(e => e.Numero).HasMaxLength(45);
@@ -127,58 +126,47 @@ public partial class AgendaAlexContext : DbContext
 
         modelBuilder.Entity<Task>(entity =>
         {
-            entity.HasKey(e => new { e.IdTasks, e.ToDoListIdToDoList, e.ToDoListIdentitéIdtable1, e.ToDoListIdentitéStatusIdStatus })
+            entity.HasKey(e => new { e.IdTasks, e.ToDoListIdToDoList })
                 .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0 });
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
             entity.ToTable("tasks");
 
-            entity.HasIndex(e => new { e.ToDoListIdToDoList, e.ToDoListIdentitéIdtable1, e.ToDoListIdentitéStatusIdStatus }, "fk_Tasks_To do list1_idx");
+            entity.HasIndex(e => e.ToDoListIdToDoList, "fk_tasks_to do list1_idx");
 
             entity.Property(e => e.IdTasks)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("idTasks");
-            entity.Property(e => e.ToDoListIdToDoList).HasColumnName("To do list_idTo do list");
-            entity.Property(e => e.ToDoListIdentitéIdtable1).HasColumnName("To do list_Identité_idtable1");
-            entity.Property(e => e.ToDoListIdentitéStatusIdStatus).HasColumnName("To do list_Identité_Status_idStatus");
+            entity.Property(e => e.ToDoListIdToDoList).HasColumnName("to do list_idTo do list");
             entity.Property(e => e.Nom).HasMaxLength(45);
             entity.Property(e => e.Tips).HasMaxLength(45);
-
-            entity.HasOne(d => d.ToDoList).WithMany(p => p.Tasks)
-                .HasForeignKey(d => new { d.ToDoListIdToDoList, d.ToDoListIdentitéIdtable1, d.ToDoListIdentitéStatusIdStatus })
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_Tasks_To do list1");
         });
 
         modelBuilder.Entity<ToDoList>(entity =>
         {
-            entity.HasKey(e => new { e.IdToDoList, e.IdentitéIdtable1, e.IdentitéStatusIdStatus })
+            entity.HasKey(e => new { e.IdToDoList, e.IdentitéIdtable1 })
                 .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
             entity.ToTable("to do list");
 
-            entity.HasIndex(e => new { e.IdentitéIdtable1, e.IdentitéStatusIdStatus }, "fk_To do list_Identité1_idx");
+            entity.HasIndex(e => e.IdentitéIdtable1, "fk_to do list_identité1_idx");
 
             entity.Property(e => e.IdToDoList)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("idTo do list");
-            entity.Property(e => e.IdentitéIdtable1).HasColumnName("Identité_idtable1");
-            entity.Property(e => e.IdentitéStatusIdStatus).HasColumnName("Identité_Status_idStatus");
+            entity.Property(e => e.IdentitéIdtable1).HasColumnName("identité_idtable1");
             entity.Property(e => e.Date).HasMaxLength(45);
             entity.Property(e => e.DateFin)
                 .HasMaxLength(45)
                 .HasColumnName("Date fin");
             entity.Property(e => e.Description).HasMaxLength(250);
             entity.Property(e => e.Titre).HasMaxLength(45);
-            entity.Property(e => e.ToDoListcol)
-                .HasMaxLength(45)
-                .HasColumnName("To do listcol");
 
             entity.HasOne(d => d.IdentitéIdtable1Navigation).WithMany(p => p.ToDoLists)
                 .HasForeignKey(d => d.IdentitéIdtable1)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_To do list_Identité1");
+                .HasConstraintName("fk_to do list_identité1");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -19,7 +19,7 @@ public partial class Identité
 
     public string? Sexe { get; set; }
 
-    public string? DateDeNaissance { get; set; }
+    public DateOnly? DateDeNaissance { get; set; }
 
     public string? VilleDeNaissance { get; set; }
 
@@ -28,4 +28,6 @@ public partial class Identité
     public virtual ICollection<Status> Statuses { get; set; } = new List<Status>();
 
     public virtual ICollection<ToDoList> ToDoLists { get; set; } = new List<ToDoList>();
+
+
 }

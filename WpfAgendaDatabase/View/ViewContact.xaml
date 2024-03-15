@@ -7,25 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-        <DataGrid Margin="20,71,20,20" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Identité}" x:Name="DataGridContacts">
-
+        <DataGrid Margin="20,71,20,20" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Identité}" x:Name="DataGridContacts" IsReadOnly="False" CellEditEnding="DataGridContacts_CellEditEnding">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="#" Binding="{Binding Idtable1}" Width="20"/>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width=""/>
-                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width=""/>
-                <DataGridTextColumn Header="Email Address" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="100"/>
+                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width="100"/>
+                <DataGridTextColumn Header="Email Address" Binding="{Binding Email}" Width="150"/>
                 <DataGridTextColumn Header="Téléphone" Binding="{Binding Numero}" Width="150"/>
-
+                <DataGridTextColumn Header="Sexe" Binding="{Binding Sexe}" Width="150"/>
+                <DataGridTextColumn Header="Date de naissance" Binding="{Binding DateDeNaissance}" Width="150"/>
+                <DataGridTextColumn Header="Ville de naissance" Binding="{Binding VilleDeNaissance}" Width="150"/>
+                
                 <!-- Add more columns as necessary -->
             </DataGrid.Columns>
-
         </DataGrid>
+           
         <Button Content="Ajouter" HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Ajouter"/>
-        
+        <Button Content="Supprimer" HorizontalAlignment="Left" Margin="116,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Supprimer"/>
+        <Button Content="Modifier" HorizontalAlignment="Left" Margin="212,21,0,0" VerticalAlignment="Top" Width="75"/>
 
         <ContentControl x:Name="MainContent" />
-        <Button Content="Supprimer" HorizontalAlignment="Left" Margin="116,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Supprimer"/>
-
-
     </Grid>
 </UserControl>

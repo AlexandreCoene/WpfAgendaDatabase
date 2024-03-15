@@ -5,18 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfAgendaDatabase.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid Background="White">
         <StackPanel>
-            <Label Content="Nom" Margin="5"/>
-            <TextBox x:Name="txtNom" Margin="5" ToolTip="Entrez le nom"/>
-            <Label Content="Prénom" Margin="5"/>
-            <TextBox x:Name="txtPrenom" Margin="5" ToolTip="Entrez le prénom"/>
-            <Label Content="Numéro de téléphone" Margin="5"/>
-            <TextBox x:Name="txtNumero" Margin="5" ToolTip="Entrez le numéro de téléphone"/>
-            <Label Content="Email" Margin="5"/>
-            <TextBox x:Name="txtEmail" Margin="5" ToolTip="Entrez l'email"/>
+            <Label Content="Nom :" Margin="5"/>
+            <TextBox x:Name="TB_Nom" Margin="5" ToolTip="Entrez le nom"/>
+            <Label Content="Prénom :" Margin="5"/>
+            <TextBox x:Name="TB_Prenom" Margin="5" ToolTip="Entrez le prénom"/>
+            <Label Content="Numéro de téléphone :" Margin="5"/>
+            <TextBox x:Name="TB_Numero" Margin="5" ToolTip="Entrez le numéro de téléphone"/>
+            <Label Content="Email :" Margin="5"/>
+            <TextBox x:Name="TB_Email" Margin="5" ToolTip="Entrez l'email"/>
+            <Label Content="Sexe : (M ou F)" Margin="5"/>
+            <TextBox x:Name="TB_Sexe" Margin="5" ToolTip="Entrez le sexe"/>
+            <Label Content="Date de naissance :" Margin="5"/>
+            <TextBox x:Name="TB_Datedenaissance" Margin="5" ToolTip="Entrez la date de naissance"/>
+
+            <Label Content="Catégorie :" Margin="5"/>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <CheckBox x:Name="CB_Famille" Content="Famille" Margin="5"/>
+                <CheckBox x:Name="CB_Ami" Content="Ami" Margin="5"/>
+                <CheckBox x:Name="CB_Travail" Content="Travail" Margin="5"/>
+            </StackPanel>
             <Button Content="Ajouter" Click="Ajouter_Click" Margin="5"/>
         </StackPanel>
+
     </Grid>
 </UserControl>

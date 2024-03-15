@@ -14,10 +14,4 @@ public partial class Task
     public sbyte? Check { get; set; }
 
     public int ToDoListIdToDoList { get; set; }
-
-    public int ToDoListIdentitéIdtable1 { get; set; }
-
-    public int ToDoListIdentitéStatusIdStatus { get; set; }
-
-    public virtual ToDoList ToDoList { get; set; } = null!;
 }
