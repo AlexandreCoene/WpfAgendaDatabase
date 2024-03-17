@@ -30,29 +30,37 @@ namespace WpfAgendaDatabase.View
         // Dans le fichier de votre UserControl ou de votre fenêtre où vous gérez les événements
         private void Ajouter_Click(object sender, RoutedEventArgs e)
         {
-            var nouvelIdentite = new Identité
+            // Créez une nouvelle instance de Identité avec les informations collectées.
+            Identité nouveauContact = new Identité
             {
                 Nom = TB_Nom.Text,
                 Prenom = TB_Prenom.Text,
                 Numero = TB_Numero.Text,
                 Email = TB_Email.Text,
-                // Assurez-vous de définir correctement toutes les autres propriétés nécessaires
+                Sexe = TB_Sexe.Text,
+                DateDeNaissance = DateOnly.Parse(TB_Datedenaissance.Text), // Assurez-vous que le format de la date est correct
+                VilleDeNaissance = TB_VilleDeNaissance.Text,
+                // Les autres propriétés peuvent être initialisées ici si nécessaire
             };
 
-            // Ajouter le nouvel identité à la base de données via DAO_Contact
-            dAO_Contact.Ajouter(nouvelIdentite);
+            // Ajoutez la relation en fonction des cases à cocher
+            if (CB_Famille.IsChecked == true)
+            {
+                nouveauContact.Relation = "Famille";
+            }
+            else if (CB_Ami.IsChecked == true)
+            {
+                nouveauContact.Relation = "Ami";
+            }
+            else if (CB_Travail.IsChecked == true)
+            {
+                nouveauContact.Relation = "Travail";
+            }
 
-            // Afficher un message de confirmation
-            MessageBox.Show("Contact ajouté avec succès!");
-
-            // Optionnel: Réinitialiser les champs du formulaire après l'ajout
-            TB_Nom.Clear();
-            TB_Prenom.Clear();
-            TB_Numero.Clear();
-            TB_Email.Clear();
-            // Réinitialiser ici les autres champs TextBox si nécessaire
+            // Utilisez DAO_Contact pour ajouter le nouveau contact et sa relation à la base de données
+            var dAO_Contact = new DAO_Contact();
+            dAO_Contact.Ajouter(nouveauContact);
         }
-
 
     }
 }

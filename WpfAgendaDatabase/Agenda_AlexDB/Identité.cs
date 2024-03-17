@@ -23,11 +23,11 @@ public partial class Identité
 
     public string? VilleDeNaissance { get; set; }
 
+    public string Relation { get; set; } = null!;
+
     public virtual ICollection<SocialProfil> SocialProfils { get; set; } = new List<SocialProfil>();
 
     public virtual ICollection<Status> Statuses { get; set; } = new List<Status>();
 
     public virtual ICollection<ToDoList> ToDoLists { get; set; } = new List<ToDoList>();
-
-
 }

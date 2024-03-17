@@ -10,13 +10,6 @@ namespace WpfAgendaDatabase.Service.DAO
 {
     public class DAO_Contact
     {
-        public List<Identité> GetAllContacts()
-        {
-            using (var context = new AgendaAlexContext())
-            {
-                return context.Identités.ToList();
-            }
-        }
 
         public void Ajouter(Identité contact)
         {
@@ -35,24 +28,14 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        //public Status GetStatusByName(string name)
-        //{
-        //    using (var context = new AgendaAlexContext())
-        //    {
-        //        return context.Statuses.FirstOrDefault(s => s.Status1 == name);
-        //    }
-        //}
-
-
-
-        //public List<Identité> LoadAllContacts_Status()
-        //{
-        //    using (var context = new AgendaAlexContext())
-        //    {
-        //        var allcont = context.Identités.Include (c => c.Statuses).ToList();
-        //        return allcont;
-        //    }
-        //}
+        public List<Identité> LoadAllContacts_Status()
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                var allcont = context.Identités.Include(c => c.Statuses).ToList();
+                return allcont;
+            }
+        }
 
         public void DeleteContact(Identité contact)
         {
@@ -69,6 +52,34 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
+        public List<Identité> GetContactsByRelation(string relation) 
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                return context.Identités
+                              .Where(i => i.Relation == relation)
+                              .ToList();
+            }
+        }
+
+        public List<Identité> RechercherContacts(string searchTerm)
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                return context.Identités
+                              .Where(i => i.Nom.Contains(searchTerm) || i.Prenom.Contains(searchTerm) || i.Numero.Contains(searchTerm) || i.Email.Contains(searchTerm))
+                              .ToList();
+            }
+        }
+
+
+        public bool checkdatabaseconnect()
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                return context.Database.CanConnect();
+            }
+        }
 
 
     }

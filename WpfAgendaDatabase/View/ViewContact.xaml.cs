@@ -23,19 +23,20 @@ namespace WpfAgendaDatabase.View
         public ObservableCollection<Identité> Identités { get; set; } = new ObservableCollection<Identité>();
         public DAO_Contact dAO_Contact;
 
-
         public ViewContact()
         {
             InitializeComponent();
 
             dAO_Contact = new DAO_Contact();
+
             LoadData();
             this.DataContext = this;
         }
 
         private void LoadData()
         {
-            DataGridContacts.ItemsSource = dAO_Contact.LoadAllContacts();
+
+            DataGridContacts.ItemsSource = dAO_Contact.LoadAllContacts_Status();  // Chargez les contacts depuis la base de données ainsi que le status associés
         }
 
 
@@ -55,6 +56,31 @@ namespace WpfAgendaDatabase.View
             }
         }
 
+        private void Button_Click_Rechercher(object sender, RoutedEventArgs e)
+        {
+            var searchTerm = SearchBox.Text;
+            var filteredContacts = dAO_Contact.RechercherContacts(searchTerm);
+            Identités.Clear();
+            foreach (var contact in filteredContacts)
+            {
+                Identités.Add(contact);
+            }
+            DataGridContacts.ItemsSource = Identités; // Cette ligne peut être omise si Identités est déjà lié à ItemsSource dans XAML
+        }
+
+        private void FilterByRelation_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+           DAO_Contact dAO_Contact = new DAO_Contact();
+            var filteredContacts = dAO_Contact.GetContactsByRelation(button.Content.ToString());
+            Identités.Clear();
+            foreach (var contact in filteredContacts)
+            {
+                Identités.Add(contact);
+            }
+            DataGridContacts.ItemsSource = Identités; // Cette ligne peut être omise si Identités est déjà lié à ItemsSource dans XAML
+        }
+
         private void DataGridContacts_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
@@ -64,12 +90,12 @@ namespace WpfAgendaDatabase.View
                 {
                     var bindingPath = (column.Binding as Binding).Path.Path; // Le nom de la propriété liée à la colonne
                     var textBox = e.EditingElement as TextBox; // La cellule éditée
-                    if (textBox != null)  
+                    if (textBox != null)
                     {
                         var editedValue = textBox.Text; // La valeur éditée
                         var editedItem = e.Row.Item as Identité; // L'élément édité
 
-                        using (var context = new AgendaAlexContext()) 
+                        using (var context = new AgendaAlexContext())
                         {
                             var item = context.Identités.FirstOrDefault(i => i.Idtable1 == editedItem.Idtable1); // L'élément à modifier
                             if (item != null)
@@ -79,10 +105,15 @@ namespace WpfAgendaDatabase.View
                                 else if (bindingPath == "Prenom") item.Prenom = editedValue;
                                 else if (bindingPath == "Numero") item.Numero = editedValue;
                                 else if (bindingPath == "Email") item.Email = editedValue;
-                                else if (bindingPath == "Sexe") item.Sexe = editedValue;                              
+                                else if (bindingPath == "Sexe") item.Sexe = editedValue;
                                 else if (bindingPath == "VilleDeNaissance") item.VilleDeNaissance = editedValue;
-                                else if (bindingPath == "Adresse") item.Adresse = editedValue;
+                                else if (bindingPath == "DateDeNaissance") item.DateDeNaissance = DateOnly.Parse(editedValue);
+                                else if (bindingPath == "Relation") item.Relation = editedValue;
 
+                                // Vous devez implémenter la logique pour les autres propriétés
+                                // var Lst = new List<Status>();
+
+                                // else if (bindingPath == "Statuses") item.Statuses = new List<Status>(); // Vous devez implémenter la logique pour ajouter des statuts
 
                                 context.SaveChanges();
                             }
@@ -91,7 +122,6 @@ namespace WpfAgendaDatabase.View
                 }
             }
         }
-
         // Le bouton Modifier n'est pas nécessaire si les modifications sont faites directement dans le DataGrid
     }
 }

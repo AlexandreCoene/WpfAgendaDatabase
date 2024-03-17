@@ -29,7 +29,6 @@ public partial class AgendaAlexContext : DbContext
     public virtual DbSet<ToDoList> ToDoLists { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
         => optionsBuilder.UseMySql("server=localhost;port=3306;user=root;database=agenda_alex", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.2.0-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,6 +50,7 @@ public partial class AgendaAlexContext : DbContext
             entity.Property(e => e.Nom).HasMaxLength(45);
             entity.Property(e => e.Numero).HasMaxLength(45);
             entity.Property(e => e.Prenom).HasMaxLength(45);
+            entity.Property(e => e.Relation).HasColumnType("enum('Famille','Travail','Ami')");
             entity.Property(e => e.Sexe).HasColumnType("enum('M','F')");
             entity.Property(e => e.VilleDeNaissance)
                 .HasMaxLength(45)
@@ -115,7 +115,7 @@ public partial class AgendaAlexContext : DbContext
                 .HasColumnName("idStatus");
             entity.Property(e => e.IdentitéIdtable1).HasColumnName("identité_idtable1");
             entity.Property(e => e.Status1)
-                .HasMaxLength(45)
+                .HasColumnType("enum('Famille','Ami','Travail')")
                 .HasColumnName("Status");
 
             entity.HasOne(d => d.IdentitéIdtable1Navigation).WithMany(p => p.Statuses)

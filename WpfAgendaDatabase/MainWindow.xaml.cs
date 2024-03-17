@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfAgendaDatabase.View;
+using WpfAgendaDatabase.Service.DAO;
 
 namespace WpfAgendaDatabase
 {
@@ -17,9 +18,19 @@ namespace WpfAgendaDatabase
     /// </summary>
     public partial class MainWindow : Window
     {
+        DAO_Contact dAO_Contact;
         public MainWindow()
         {
             InitializeComponent();
+            dAO_Contact = new DAO_Contact(); // Initialisation de DAO_Contact
+            if (dAO_Contact.checkdatabaseconnect()) 
+            {
+                MessageBox.Show("Database connected");
+            }
+            else
+            {
+                MessageBox.Show("Database not connected");
+            }        
         }
 
         private void BtnAccueil_Click(object sender, RoutedEventArgs e)
