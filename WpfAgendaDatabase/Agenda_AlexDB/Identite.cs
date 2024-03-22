@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WpfAgendaDatabase.Agenda_AlexDB;
 
-public partial class Identité
+public partial class Identite
 {
     public int Idtable1 { get; set; }
 
@@ -28,6 +28,4 @@ public partial class Identité
     public virtual ICollection<SocialProfil> SocialProfils { get; set; } = new List<SocialProfil>();
 
     public virtual ICollection<Status> Statuses { get; set; } = new List<Status>();
-
-    public virtual ICollection<ToDoList> ToDoLists { get; set; } = new List<ToDoList>();
 }

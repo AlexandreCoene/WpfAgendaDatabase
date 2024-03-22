@@ -31,7 +31,7 @@ namespace WpfAgendaDatabase.View
         private void Ajouter_Click(object sender, RoutedEventArgs e)
         {
             // Créez une nouvelle instance de Identité avec les informations collectées.
-            Identité nouveauContact = new Identité
+            Identite nouveauContact = new Identite
             {
                 Nom = TB_Nom.Text,
                 Prenom = TB_Prenom.Text,

@@ -15,7 +15,5 @@ public partial class ToDoList
 
     public string? Description { get; set; }
 
-    public int IdentitéIdtable1 { get; set; }
-
-    public virtual Identité IdentitéIdtable1Navigation { get; set; } = null!;
+    public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
 }

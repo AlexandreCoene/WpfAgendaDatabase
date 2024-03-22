@@ -16,7 +16,7 @@ public partial class AgendaAlexContext : DbContext
     {
     }
 
-    public virtual DbSet<Identité> Identités { get; set; }
+    public virtual DbSet<Identite> Identites { get; set; }
 
     public virtual DbSet<SocialMedium> SocialMedia { get; set; }
 
@@ -37,11 +37,11 @@ public partial class AgendaAlexContext : DbContext
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<Identité>(entity =>
+        modelBuilder.Entity<Identite>(entity =>
         {
             entity.HasKey(e => e.Idtable1).HasName("PRIMARY");
 
-            entity.ToTable("identité");
+            entity.ToTable("identite");
 
             entity.Property(e => e.Idtable1).HasColumnName("idtable1");
             entity.Property(e => e.Adresse).HasMaxLength(45);
@@ -140,33 +140,26 @@ public partial class AgendaAlexContext : DbContext
             entity.Property(e => e.ToDoListIdToDoList).HasColumnName("to do list_idTo do list");
             entity.Property(e => e.Nom).HasMaxLength(45);
             entity.Property(e => e.Tips).HasMaxLength(45);
+
+            entity.HasOne(d => d.ToDoListIdToDoListNavigation).WithMany(p => p.Tasks)
+                .HasForeignKey(d => d.ToDoListIdToDoList)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_tasks_to do list1");
         });
 
         modelBuilder.Entity<ToDoList>(entity =>
         {
-            entity.HasKey(e => new { e.IdToDoList, e.IdentitéIdtable1 })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.IdToDoList).HasName("PRIMARY");
 
             entity.ToTable("to do list");
 
-            entity.HasIndex(e => e.IdentitéIdtable1, "fk_to do list_identité1_idx");
-
-            entity.Property(e => e.IdToDoList)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("idTo do list");
-            entity.Property(e => e.IdentitéIdtable1).HasColumnName("identité_idtable1");
+            entity.Property(e => e.IdToDoList).HasColumnName("idTo do list");
             entity.Property(e => e.Date).HasMaxLength(45);
             entity.Property(e => e.DateFin)
                 .HasMaxLength(45)
                 .HasColumnName("Date fin");
             entity.Property(e => e.Description).HasMaxLength(250);
             entity.Property(e => e.Titre).HasMaxLength(45);
-
-            entity.HasOne(d => d.IdentitéIdtable1Navigation).WithMany(p => p.ToDoLists)
-                .HasForeignKey(d => d.IdentitéIdtable1)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_to do list_identité1");
         });
 
         OnModelCreatingPartial(modelBuilder);

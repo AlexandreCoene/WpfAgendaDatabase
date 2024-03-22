@@ -13,7 +13,7 @@ public partial class SocialProfil
 
     public int SocialMediaIdSocialMedia { get; set; }
 
-    public virtual Identité IdentitéIdtable1Navigation { get; set; } = null!;
+    public virtual Identite IdentitéIdtable1Navigation { get; set; } = null!;
 
     public virtual SocialMedium SocialMediaIdSocialMediaNavigation { get; set; } = null!;
 }

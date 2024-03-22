@@ -14,4 +14,6 @@ public partial class Task
     public sbyte? Check { get; set; }
 
     public int ToDoListIdToDoList { get; set; }
+
+    public virtual ToDoList ToDoListIdToDoListNavigation { get; set; } = null!;
 }

@@ -20,7 +20,7 @@ namespace WpfAgendaDatabase.View
 {
     public partial class ViewContact : UserControl
     {
-        public ObservableCollection<Identité> Identités { get; set; } = new ObservableCollection<Identité>();
+        public ObservableCollection<Identite> Identites { get; set; } = new ObservableCollection<Identite>();
         public DAO_Contact dAO_Contact;
 
         public ViewContact()
@@ -47,11 +47,11 @@ namespace WpfAgendaDatabase.View
 
         private void Button_Click_Supprimer(object sender, RoutedEventArgs e)
         {
-            var item = DataGridContacts.SelectedItem as Identité;
+            var item = DataGridContacts.SelectedItem as Identite;
             if (item != null)
             {
                 dAO_Contact.DeleteContact(item);
-                Identités.Remove(item);
+                Identites.Remove(item);
                 // Pas besoin de réaffecter ItemsSource, la ObservableCollection s'en charge
             }
         }
@@ -60,12 +60,12 @@ namespace WpfAgendaDatabase.View
         {
             var searchTerm = SearchBox.Text;
             var filteredContacts = dAO_Contact.RechercherContacts(searchTerm);
-            Identités.Clear();
+            Identites.Clear();
             foreach (var contact in filteredContacts)
             {
-                Identités.Add(contact);
+                Identites.Add(contact);
             }
-            DataGridContacts.ItemsSource = Identités; // Cette ligne peut être omise si Identités est déjà lié à ItemsSource dans XAML
+            DataGridContacts.ItemsSource = Identites; // Cette ligne peut être omise si Identites est déjà lié à ItemsSource dans XAML
         }
 
         private void FilterByRelation_Click(object sender, RoutedEventArgs e)
@@ -73,12 +73,12 @@ namespace WpfAgendaDatabase.View
             Button button = sender as Button;
            DAO_Contact dAO_Contact = new DAO_Contact();
             var filteredContacts = dAO_Contact.GetContactsByRelation(button.Content.ToString());
-            Identités.Clear();
+            Identites.Clear();
             foreach (var contact in filteredContacts)
             {
-                Identités.Add(contact);
+                Identites.Add(contact);
             }
-            DataGridContacts.ItemsSource = Identités; // Cette ligne peut être omise si Identités est déjà lié à ItemsSource dans XAML
+            DataGridContacts.ItemsSource = Identites; // Cette ligne peut être omise si Identites est déjà lié à ItemsSource dans XAML
         }
 
         private void DataGridContacts_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -93,11 +93,11 @@ namespace WpfAgendaDatabase.View
                     if (textBox != null)
                     {
                         var editedValue = textBox.Text; // La valeur éditée
-                        var editedItem = e.Row.Item as Identité; // L'élément édité
+                        var editedItem = e.Row.Item as Identite; // L'élément édité
 
                         using (var context = new AgendaAlexContext())
                         {
-                            var item = context.Identités.FirstOrDefault(i => i.Idtable1 == editedItem.Idtable1); // L'élément à modifier
+                            var item = context.Identites.FirstOrDefault(i => i.Idtable1 == editedItem.Idtable1); // L'élément à modifier
                             if (item != null)
                             {
                                 // Reflection peut être utilisé ici pour rendre ce code plus générique, cela nécessite l'utilisation du nom de la propriété (bindingPath)

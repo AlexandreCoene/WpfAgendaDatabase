@@ -38,7 +38,6 @@ namespace WpfAgendaDatabase
             MainContent.Content = new ViewAccueil(); // Changez simplement le contenu de MainContent
         }
 
-
         private void BtnCalendrier_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new ViewCalendrier();
@@ -51,9 +50,8 @@ namespace WpfAgendaDatabase
 
         private void BtnGestion_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new ViewGestion();
+            MainContent.Content = new ViewToDoList();
         }
-
 
         // Ajoutez d'autres méthodes de gestion des clics si nécessaire.
     }

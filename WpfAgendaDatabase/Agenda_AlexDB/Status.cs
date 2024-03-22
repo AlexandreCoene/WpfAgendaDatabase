@@ -11,5 +11,5 @@ public partial class Status
 
     public int IdentitéIdtable1 { get; set; }
 
-    public virtual Identité IdentitéIdtable1Navigation { get; set; } = null!;
+    public virtual Identite IdentitéIdtable1Navigation { get; set; } = null!;
 }
