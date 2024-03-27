@@ -6,7 +6,25 @@
              xmlns:local="clr-namespace:WpfAgendaDatabase.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="AliceBlue">
-            
+    <UserControl.Resources>
+        <DataTemplate x:Key="EventTemplate">
+            <Border Background="#FFFDE7" Padding="10" Margin="5" CornerRadius="5" BorderBrush="Gray" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="{Binding Summary}" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Text="{Binding Start.DateTime, StringFormat='dd/MM/yyyy HH:mm'}" FontStyle="Italic" Margin="0,5,0,0"/>
+                    <TextBlock Text="{Binding End.DateTime, StringFormat='dd/MM/yyyy HH:mm'}" FontStyle="Italic" Margin="0,5,0,0"/>
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <ListView x:Name="EventsListView" ItemsSource="{Binding Events}" ItemTemplate="{StaticResource EventTemplate}" Margin="10">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
     </Grid>
 </UserControl>

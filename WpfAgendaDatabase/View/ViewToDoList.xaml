@@ -13,7 +13,8 @@
                     <TextBlock Text="{Binding Titre}" FontWeight="Bold"/>
                     <TextBlock Text="{Binding Date}" FontStyle="Italic"/>
                     <TextBlock Text="{Binding Description}"/>
-                    
+                    <TextBlock Text="{Binding Task}"/>
+
                     <!-- Vous pouvez ajouter plus de détails ici -->
                 </StackPanel>
             </Border>
