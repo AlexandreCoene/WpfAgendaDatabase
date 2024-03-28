@@ -23,6 +23,7 @@ namespace WpfAgendaDatabase.View
         public ObservableCollection<Identite> Identites { get; set; } = new ObservableCollection<Identite>();
         public DAO_Contact dAO_Contact;
 
+
         public ViewContact()
         {
             InitializeComponent();

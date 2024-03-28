@@ -31,7 +31,6 @@ namespace WpfAgendaDatabase.View
             InitializeComponent();
 
             this.DataContext = this;
-
             _daoToDoList = new DAO_ToDoList();
             LoadToDoLists();
         }
@@ -41,6 +40,33 @@ namespace WpfAgendaDatabase.View
             var toDoLists = _daoToDoList.GetAllToDoLists();
             ToDoLists = new ObservableCollection<ToDoList>(toDoLists);
 
+        }
+
+        private void AjouterToDoList_Click(object sender, RoutedEventArgs e)
+        {
+            // Vider le contenu actuel
+            MainContent.Content = null;
+
+            // Charger la nouvelle vue
+            MainContent.Content = new ViewAjouterToDoList();
+        }
+
+        private void SupprimerToDoList_Click(object sender, RoutedEventArgs e)
+        {
+            var toDoListSelected = ListViewToDoLists.SelectedItem as ToDoList;
+            if (toDoListSelected != null)
+            {
+                // Suppression de l'élément de la base de données
+                _daoToDoList.DeleteToDoList(toDoListSelected.IdToDoList);
+
+                // Suppression de l'élément de la collection, ce qui mettra à jour l'UI
+                ToDoLists.Remove(toDoListSelected);
+            }
+        }
+
+        private void ModifierToDoList_Click(object sender, RoutedEventArgs e)
+        {
+            //MainContent.Content = new ViewModifierToDoList(ListViewToDoLists.SelectedItem as ToDoList);
         }
     }
 }

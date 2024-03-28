@@ -13,20 +13,38 @@
                     <TextBlock Text="{Binding Titre}" FontWeight="Bold"/>
                     <TextBlock Text="{Binding Date}" FontStyle="Italic"/>
                     <TextBlock Text="{Binding Description}"/>
-                    <TextBlock Text="{Binding Task}"/>
-
-                    <!-- Vous pouvez ajouter plus de détails ici -->
+                    <!-- Contrôle pour afficher les tâches -->
+                    <ItemsControl ItemsSource="{Binding Tasks}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Tips}" FontStyle="Italic" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Border>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <ListView ItemsSource="{Binding ToDoLists}" ItemTemplate="{StaticResource ToDoListTemplate}">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+    <Grid Background="AliceBlue">
+        <StackPanel>
+            <!-- Boutons pour ajouter, supprimer, et modifier des ToDoLists -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                <Button Content="Ajouter ToDoList" Margin="5" Click="AjouterToDoList_Click"/>
+                <Button Content="Supprimer ToDoList" Margin="5" Click="SupprimerToDoList_Click"/>
+                <Button Content="Modifier ToDoList" Margin="5" Click="ModifierToDoList_Click"/>
+            </StackPanel>
+            <!-- ListView pour afficher les ToDoLists -->
+            <ListView x:Name="ListViewToDoLists" ItemsSource="{Binding ToDoLists}" ItemTemplate="{StaticResource ToDoListTemplate}" SelectionMode="Single">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </StackPanel>
+        <ContentControl x:Name="MainContent" />
     </Grid>
 </UserControl>

@@ -26,5 +26,56 @@ namespace WpfAgendaDatabase.Service.DAO
                 .ToList();
         }
 
+        public void AddToDoList(ToDoList toDoList)
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                context.ToDoLists.Add(toDoList);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateToDoList(ToDoList toDoList)
+        {
+            _context.ToDoLists.Update(toDoList);
+            _context.SaveChanges();
+        }
+
+        public void DeleteToDoList(int idToDoList)
+        {
+            var toDoList = _context.ToDoLists.Find(idToDoList);
+            if (toDoList != null)
+            {
+                _context.ToDoLists.Remove(toDoList);
+                _context.SaveChanges();
+            }
+        }
+
+
+
+        //--------------------------------- Task ---------------------------------//
+
+        //public void AddTask(Task task)
+        //{
+        //    _context.Tasks.Add(task);
+        //    _context.SaveChanges();
+        //}
+
+        //public void UpdateTask(Task task)
+        //{
+        //    _context.Tasks.Update(task);
+        //    _context.SaveChanges();
+        //}
+
+        //public void DeleteTask(Task task)
+        //{
+        //    _context.Tasks.Remove(task);
+        //    _context.SaveChanges();
+        //}
+
+        //public List<Task> GetAllTasks()
+        //{
+        //    return _context.Tasks.ToList();
+        //}
     }
 }
