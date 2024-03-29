@@ -31,8 +31,9 @@
 
         <Button Content="Ajouter" HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Ajouter"/>
         <Button Content="Supprimer" HorizontalAlignment="Left" Margin="116,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Supprimer"/>
-        <Button Content="Modifier" HorizontalAlignment="Left" Margin="212,21,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Détails" HorizontalAlignment="Left" Margin="212,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Details"/>
         
+
         <StackPanel Orientation="Horizontal" Margin="10">
             <TextBox x:Name="SearchBox" Width="200" Margin="300,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Button Content="Rechercher" Click="Button_Click_Rechercher" Margin="5,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -42,6 +43,7 @@
                 <Button Content="Travail" Click="FilterByRelation_Click" Margin="5,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </StackPanel>
         </StackPanel>
+        
 
         <ContentControl x:Name="MainContent" />
     </Grid>

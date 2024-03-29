@@ -16,12 +16,14 @@ using System.Collections.ObjectModel;
 using WpfAgendaDatabase.Agenda_AlexDB;
 using WpfAgendaDatabase.Service.DAO;
 
+
 namespace WpfAgendaDatabase.View
 {
     public partial class ViewContact : UserControl
     {
         public ObservableCollection<Identite> Identites { get; set; } = new ObservableCollection<Identite>();
         public DAO_Contact dAO_Contact;
+
 
 
         public ViewContact()
@@ -56,6 +58,24 @@ namespace WpfAgendaDatabase.View
                 // Pas besoin de réaffecter ItemsSource, la ObservableCollection s'en charge
             }
         }
+
+        private void Button_Click_Details(object sender, RoutedEventArgs e)
+        {
+            var selectedContact = DataGridContacts.SelectedItem as Identite;
+            if (selectedContact != null)
+            {
+                var viewSocialMedia = new ViewSocialMedia();
+                viewSocialMedia.SetSelectedContact(selectedContact); // Assurez-vous que cette méthode est bien appelée
+                MainContent.Content = viewSocialMedia;
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un contact pour voir les détails.", "Aucun contact sélectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+
 
         private void Button_Click_Rechercher(object sender, RoutedEventArgs e)
         {

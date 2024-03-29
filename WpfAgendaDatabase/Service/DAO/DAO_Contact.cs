@@ -81,6 +81,45 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
+        public List<SocialProfil> GetSocialProfiles(int contactId)
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                return context.SocialProfils
+                    .Where(p => p.IdentitéIdtable1 == contactId)
+                    .Include(p => p.SocialMediaIdSocialMediaNavigation)
+                    .ToList();
+            }
+        }
+
+        public void AddSocialProfil(SocialProfil profile, SocialMedium socialMedia)
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                context.SocialMedia.Add(socialMedia);
+                context.SaveChanges();
+
+                profile.SocialMediaIdSocialMedia = socialMedia.IdSocialMedia;
+                context.SocialProfils.Add(profile);
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteSocialProfile(SocialProfil profile)
+        {
+            using (var context = new AgendaAlexContext())
+            {
+                var existingProfile = context.SocialProfils
+                    .FirstOrDefault(p => p.IdSocialProfils == profile.IdSocialProfils);
+
+                if (existingProfile != null)
+                {
+                    context.SocialProfils.Remove(existingProfile);
+                    context.SaveChanges();
+                }
+            }
+        }
+
 
     }
 }
