@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WpfAgendaDatabase.Agenda_AlexDB;
 
-public partial class Task
+public partial class Tache
 {
     public int IdTasks { get; set; }
 

@@ -66,7 +66,17 @@ namespace WpfAgendaDatabase.View
 
         private void ModifierToDoList_Click(object sender, RoutedEventArgs e)
         {
-            //MainContent.Content = new ViewModifierToDoList(ListViewToDoLists.SelectedItem as ToDoList);
+            // ouvrir la view ajoutertask avec le toDoListId
+            var toDoListSelected = ListViewToDoLists.SelectedItem as ToDoList;
+            if (toDoListSelected != null)
+            {
+                // Vider le contenu actuel
+                MainContent.Content = null;
+
+                // Charger la nouvelle vue
+                MainContent.Content = new ViewAjouterTask(toDoListSelected.IdToDoList);
+            }
+
         }
     }
 }

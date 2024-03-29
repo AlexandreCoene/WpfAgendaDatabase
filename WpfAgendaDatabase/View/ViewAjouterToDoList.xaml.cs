@@ -46,6 +46,9 @@ namespace WpfAgendaDatabase.View
 
                 // Affichez un message de confirmation ou fermez cette vue après l'ajout
                 MessageBox.Show("ToDoList ajoutée avec succès.");
+
+                textBoxTitre.Clear();
+                textBoxDate.Clear();
             }
             else
             {

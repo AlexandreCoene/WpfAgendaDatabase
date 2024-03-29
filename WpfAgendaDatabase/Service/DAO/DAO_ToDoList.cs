@@ -22,7 +22,7 @@ namespace WpfAgendaDatabase.Service.DAO
         public List<ToDoList> GetAllToDoLists()
         {
             return _context.ToDoLists
-                .Include(tdl => tdl.Tasks)
+                .Include(tdl => tdl.Taches)
                 .ToList();
         }
 
@@ -41,41 +41,53 @@ namespace WpfAgendaDatabase.Service.DAO
             _context.SaveChanges();
         }
 
-        public void DeleteToDoList(int idToDoList)
+        public void DeleteToDoList(int toDoListId)
         {
-            var toDoList = _context.ToDoLists.Find(idToDoList);
+            // Find the toDoList with its related Taches
+            var toDoList = _context.ToDoLists
+                .Include(tdl => tdl.Taches)
+                .FirstOrDefault(tdl => tdl.IdToDoList == toDoListId);
+
             if (toDoList != null)
             {
+                // Remove each Tache related to the ToDoList
+                foreach (var tache in toDoList.Taches.ToList())
+                {
+                    _context.Taches.Remove(tache);
+                }
+
+                // Remove the ToDoList itself
                 _context.ToDoLists.Remove(toDoList);
                 _context.SaveChanges();
             }
         }
 
 
-
         //--------------------------------- Task ---------------------------------//
 
-        //public void AddTask(Task task)
-        //{
-        //    _context.Tasks.Add(task);
-        //    _context.SaveChanges();
-        //}
 
-        //public void UpdateTask(Task task)
-        //{
-        //    _context.Tasks.Update(task);
-        //    _context.SaveChanges();
-        //}
+        public void AddTask(Tache task)
+        {
+            _context.Taches.Add(task);
+            _context.SaveChanges();
+        }
 
-        //public void DeleteTask(Task task)
-        //{
-        //    _context.Tasks.Remove(task);
-        //    _context.SaveChanges();
-        //}
+        public List<Tache> GetTachesFromToDoList(int toDoListId)
+        {
+            return _context.Taches
+                .Where(tache => tache.ToDoListIdToDoList == toDoListId)
+                .ToList();
+        }
 
-        //public List<Task> GetAllTasks()
-        //{
-        //    return _context.Tasks.ToList();
-        //}
+        public void DeleteTask(int taskId)
+        {
+            var taskToDelete = _context.Taches.FirstOrDefault(t => t.IdTasks == taskId);
+            if (taskToDelete != null)
+            {
+                _context.Taches.Remove(taskToDelete);
+                _context.SaveChanges();
+            }
+        }
+
     }
 }

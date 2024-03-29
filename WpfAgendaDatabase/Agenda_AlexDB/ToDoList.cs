@@ -15,5 +15,5 @@ public partial class ToDoList
 
     public string? Description { get; set; }
 
-    public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
+    public virtual ICollection<Tache> Taches { get; set; } = new List<Tache>();
 }

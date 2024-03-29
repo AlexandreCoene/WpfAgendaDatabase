@@ -14,7 +14,7 @@
                     <TextBlock Text="{Binding Date}" FontStyle="Italic"/>
                     <TextBlock Text="{Binding Description}"/>
                     <!-- Contrôle pour afficher les tâches -->
-                    <ItemsControl ItemsSource="{Binding Tasks}">
+                    <ItemsControl ItemsSource="{Binding Taches}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

@@ -24,7 +24,7 @@ public partial class AgendaAlexContext : DbContext
 
     public virtual DbSet<Status> Statuses { get; set; }
 
-    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<Tache> Taches { get; set; }
 
     public virtual DbSet<ToDoList> ToDoLists { get; set; }
 
@@ -124,13 +124,13 @@ public partial class AgendaAlexContext : DbContext
                 .HasConstraintName("fk_status_identité1");
         });
 
-        modelBuilder.Entity<Task>(entity =>
+        modelBuilder.Entity<Tache>(entity =>
         {
             entity.HasKey(e => new { e.IdTasks, e.ToDoListIdToDoList })
                 .HasName("PRIMARY")
                 .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-            entity.ToTable("tasks");
+            entity.ToTable("tache");
 
             entity.HasIndex(e => e.ToDoListIdToDoList, "fk_tasks_to do list1_idx");
 
@@ -141,7 +141,7 @@ public partial class AgendaAlexContext : DbContext
             entity.Property(e => e.Nom).HasMaxLength(45);
             entity.Property(e => e.Tips).HasMaxLength(45);
 
-            entity.HasOne(d => d.ToDoListIdToDoListNavigation).WithMany(p => p.Tasks)
+            entity.HasOne(d => d.ToDoListIdToDoListNavigation).WithMany(p => p.Taches)
                 .HasForeignKey(d => d.ToDoListIdToDoList)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_tasks_to do list1");
