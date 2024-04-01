@@ -7,11 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-
-
-
+        
         <DataGrid Margin="20,71,20,20" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Identité}" x:Name="DataGridContacts" IsReadOnly="False" CellEditEnding="DataGridContacts_CellEditEnding">
-
 
             <!-- Assurez-vous que ce StackPanel est placé au-dessus de votre DataGrid pour un agencement logique -->
 
@@ -32,7 +29,6 @@
         <Button Content="Ajouter" HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Ajouter"/>
         <Button Content="Supprimer" HorizontalAlignment="Left" Margin="116,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Supprimer"/>
         <Button Content="Détails" HorizontalAlignment="Left" Margin="212,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Details"/>
-        
 
         <StackPanel Orientation="Horizontal" Margin="10">
             <TextBox x:Name="SearchBox" Width="200" Margin="300,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -43,7 +39,6 @@
                 <Button Content="Travail" Click="FilterByRelation_Click" Margin="5,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </StackPanel>
         </StackPanel>
-        
 
         <ContentControl x:Name="MainContent" />
     </Grid>

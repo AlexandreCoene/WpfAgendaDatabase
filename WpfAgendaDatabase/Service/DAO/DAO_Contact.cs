@@ -11,7 +11,8 @@ namespace WpfAgendaDatabase.Service.DAO
     public class DAO_Contact
     {
 
-        public void Ajouter(Identite contact)
+        //----------------------------------------- Contact ----------------------------------------------
+        public void Ajouter(Identite contact) // Ajouter un contact
         {
             using (var context = new AgendaAlexContext())
             {
@@ -20,7 +21,7 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public List<Identite> LoadAllContacts()
+        public List<Identite> LoadAllContacts() // Charger tous les contacts
         {
             using (var context = new AgendaAlexContext())
             {
@@ -28,7 +29,7 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public List<Identite> LoadAllContacts_Status()
+        public List<Identite> LoadAllContacts_Status() // Charger tous les contacts avec leur statut
         {
             using (var context = new AgendaAlexContext())
             {
@@ -37,7 +38,7 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public void DeleteContact(Identite contact)
+        public void DeleteContact(Identite contact) // Supprimer un contact 
         {
             using (var context = new AgendaAlexContext())
             {
@@ -52,7 +53,7 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public List<Identite> GetContactsByRelation(string relation) 
+        public List<Identite> GetContactsByRelation(string relation)  // Récupérer les contacts par relation (Famille, Travail, Ami)
         {
             using (var context = new AgendaAlexContext())
             {
@@ -62,7 +63,7 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public List<Identite> RechercherContacts(string searchTerm)
+        public List<Identite> RechercherContacts(string searchTerm) // Rechercher des contacts
         {
             using (var context = new AgendaAlexContext())
             {
@@ -72,8 +73,9 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
+        //----------------------------------------- Statut DB ----------------------------------------------
 
-        public bool checkdatabaseconnect()
+        public bool checkdatabaseconnect() // Vérifier la connexion à la base de données
         {
             using (var context = new AgendaAlexContext())
             {
@@ -81,7 +83,8 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public List<SocialProfil> GetSocialProfiles(int contactId)
+        //-------------------------------------- Social Media ------------------------------------------
+        public List<SocialProfil> GetSocialProfiles(int contactId) // Récupérer les profils sociaux d'un contact
         {
             using (var context = new AgendaAlexContext())
             {
@@ -92,7 +95,7 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public void AddSocialProfil(SocialProfil profile, SocialMedium socialMedia)
+        public void AddSocialProfil(SocialProfil profile, SocialMedium socialMedia) // Ajouter un profil social
         {
             using (var context = new AgendaAlexContext())
             {
@@ -105,7 +108,7 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public void DeleteSocialProfile(SocialProfil profile)
+        public void DeleteSocialProfile(SocialProfil profile) // Supprimer un profil social
         {
             using (var context = new AgendaAlexContext())
             {
