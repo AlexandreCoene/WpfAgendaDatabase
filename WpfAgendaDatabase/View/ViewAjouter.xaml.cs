@@ -30,7 +30,6 @@ namespace WpfAgendaDatabase.View
         // Dans le fichier de votre UserControl ou de votre fenêtre où vous gérez les événements
         private void Ajouter_Click(object sender, RoutedEventArgs e)
         {
-            // Créez une nouvelle instance de Identité avec les informations collectées.
             Identite nouveauContact = new Identite
             {
                 Nom = TB_Nom.Text,
@@ -38,29 +37,33 @@ namespace WpfAgendaDatabase.View
                 Numero = TB_Numero.Text,
                 Email = TB_Email.Text,
                 Sexe = TB_Sexe.Text,
-                DateDeNaissance = DateOnly.Parse(TB_Datedenaissance.Text), // Assurez-vous que le format de la date est correct
+                // Gestion conditionnelle de la date de naissance
+                DateDeNaissance = Cal_DateDeNaissance.SelectedDate.HasValue ? DateOnly.FromDateTime(Cal_DateDeNaissance.SelectedDate.Value) : null,
                 VilleDeNaissance = TB_VilleDeNaissance.Text,
                 // Les autres propriétés peuvent être initialisées ici si nécessaire
             };
 
-            // Ajoutez la relation en fonction des cases à cocher
-            if (CB_Famille.IsChecked == true)
-            {
-                nouveauContact.Relation = "Famille";
-            }
-            else if (CB_Ami.IsChecked == true)
-            {
-                nouveauContact.Relation = "Ami";
-            }
-            else if (CB_Travail.IsChecked == true)
-            {
-                nouveauContact.Relation = "Travail";
-            }
+            if (CB_Famille.IsChecked == true) nouveauContact.Relation = "Famille";
+            else if (CB_Ami.IsChecked == true) nouveauContact.Relation = "Ami";
+            else if (CB_Travail.IsChecked == true) nouveauContact.Relation = "Travail";
 
-            // Utilisez DAO_Contact pour ajouter le nouveau contact et sa relation à la base de données
-            var dAO_Contact = new DAO_Contact();
             dAO_Contact.Ajouter(nouveauContact);
-        }
 
+            // Afficher un message de confirmation
+            MessageBox.Show("Le contact a été ajouté avec succès.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Réinitialiser les champs de saisie pour une nouvelle entrée
+            TB_Nom.Text = string.Empty;
+            TB_Prenom.Text = string.Empty;
+            TB_Numero.Text = string.Empty;
+            TB_Email.Text = string.Empty;
+            TB_Sexe.Text = string.Empty;
+            Cal_DateDeNaissance.SelectedDate = null; // Pas nécessaire de vérifier si une date a été sélectionnée
+            TB_VilleDeNaissance.Text = string.Empty;
+
+            CB_Famille.IsChecked = false;
+            CB_Ami.IsChecked = false;
+            CB_Travail.IsChecked = false;
+        }
     }
 }

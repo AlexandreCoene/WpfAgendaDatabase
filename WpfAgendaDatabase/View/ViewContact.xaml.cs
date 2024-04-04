@@ -38,10 +38,8 @@ namespace WpfAgendaDatabase.View
 
         private void LoadData()
         {
-
             DataGridContacts.ItemsSource = dAO_Contact.LoadAllContacts_Status();  // Chargez les contacts depuis la base de données ainsi que le status associés
         }
-
 
         private void Button_Click_Ajouter(object sender, RoutedEventArgs e)
         {
@@ -74,9 +72,6 @@ namespace WpfAgendaDatabase.View
             }
         }
 
-
-
-
         private void Button_Click_Rechercher(object sender, RoutedEventArgs e)
         {
             var searchTerm = SearchBox.Text;
@@ -100,6 +95,31 @@ namespace WpfAgendaDatabase.View
                 Identites.Add(contact);
             }
             DataGridContacts.ItemsSource = Identites; // Cette ligne peut être omise si Identites est déjà lié à ItemsSource dans XAML
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Obtenir le texte de recherche de l'utilisateur
+            var searchTerm = SearchBox.Text.Trim();
+
+            // Filtrer les contacts basés sur le terme de recherche
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // Appel à la méthode de recherche de votre DAO
+                var filteredContacts = dAO_Contact.RechercherContacts(searchTerm);
+
+                // Mise à jour de l'interface utilisateur avec les résultats filtrés
+                Identites.Clear();
+                foreach (var contact in filteredContacts)
+                {
+                    Identites.Add(contact);
+                }
+            }
+            else
+            {
+                // Ici, vous pouvez choisir de réinitialiser l'affichage ou de gérer un état vide
+                LoadData(); // Charger tous les contacts si le champ de recherche est vide
+            }
         }
 
         private void DataGridContacts_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -130,12 +150,6 @@ namespace WpfAgendaDatabase.View
                                 else if (bindingPath == "VilleDeNaissance") item.VilleDeNaissance = editedValue;
                                 else if (bindingPath == "DateDeNaissance") item.DateDeNaissance = DateOnly.Parse(editedValue);
                                 else if (bindingPath == "Relation") item.Relation = editedValue;
-
-                                // Vous devez implémenter la logique pour les autres propriétés
-                                // var Lst = new List<Status>();
-
-                                // else if (bindingPath == "Statuses") item.Statuses = new List<Status>(); // Vous devez implémenter la logique pour ajouter des statuts
-
                                 context.SaveChanges();
                             }
                         }
@@ -143,6 +157,5 @@ namespace WpfAgendaDatabase.View
                 }
             }
         }
-        // Le bouton Modifier n'est pas nécessaire si les modifications sont faites directement dans le DataGrid
     }
 }

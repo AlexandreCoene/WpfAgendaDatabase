@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace WpfAgendaDatabase.View
 {
@@ -23,6 +27,44 @@ namespace WpfAgendaDatabase.View
         public ViewAccueil()
         {
             InitializeComponent();
+            this.DataContext = new ViewModel();
+            SetupDateTimeDisplay();
+
+        }
+
+        private void SetupDateTimeDisplay()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1); // Mise à jour chaque seconde
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Formattez la date et l'heure comme vous le souhaitez ici
+            DateTimeDisplay.Text = DateTime.Now.ToString("G");
         }
     }
+
+    
+
+    public class ViewModel
+    {
+        public SeriesCollection MySeries { get; set; }
+
+        public ViewModel()
+        {
+            MySeries = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Tâches Complétées",
+                    Values = new ChartValues<int> { 5, 3, 6, 7, 3, 5 }
+                }
+                // Ajoutez d'autres séries ici selon le besoin
+            };
+        }
+    }
+
 }

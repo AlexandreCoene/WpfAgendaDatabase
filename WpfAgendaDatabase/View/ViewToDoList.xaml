@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <DataTemplate x:Key="ToDoListTemplate">
-            <Border Background="Yellow" Padding="10" Margin="5" CornerRadius="5">
+            <Border Background="Yellow" Padding="10" Margin="5" CornerRadius="5" BorderBrush="DarkGray" BorderThickness="2">
                 <StackPanel>
                     <TextBlock Text="{Binding Titre}" FontWeight="Bold"/>
                     <TextBlock Text="{Binding Date}" FontStyle="Italic"/>
@@ -29,22 +29,38 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid Background="AliceBlue">
-        <StackPanel>
-            <!-- Boutons pour ajouter, supprimer, et modifier des ToDoLists -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-                <Button Content="Ajouter ToDoList" Margin="5" Click="AjouterToDoList_Click"/>
-                <Button Content="Supprimer ToDoList" Margin="5" Click="SupprimerToDoList_Click"/>
-                <Button Content="Modifier ToDoList" Margin="5" Click="ModifierToDoList_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Pour le titre -->
+            <RowDefinition Height="Auto"/>
+            <!-- Pour les boutons -->
+            <RowDefinition Height="*"/>
+            <!-- Pour afficher les ToDoLists -->
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="To Do List :" FontSize="24" FontWeight="Bold" TextDecorations="Underline" Margin="20,10,20,0" HorizontalAlignment="Left"/>
+
+        <!-- Boutons dans la deuxième ligne -->
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="20,10,20,10" Padding="5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Ajouter ToDoList ➕" Margin="5" Width="150" Click="AjouterToDoList_Click" Style="{StaticResource GreenRoundedButtonStyle}"/>
+                <Button Content="Supprimer ToDoList ➖" Margin="5" Width="165" Click="SupprimerToDoList_Click" Style="{StaticResource RedRoundedButtonStyle}" />
+                <Button Content="Modifier ToDoList" Margin="5" Width="140" Click="ModifierToDoList_Click" Style="{StaticResource BlueRoundedButtonStyle}"/>
             </StackPanel>
-            <!-- ListView pour afficher les ToDoLists -->
-            <ListView x:Name="ListViewToDoLists" ItemsSource="{Binding ToDoLists}" ItemTemplate="{StaticResource ToDoListTemplate}" SelectionMode="Single">
+        </Border>
+
+        <!-- ListView pour afficher les ToDoLists dans la troisième ligne -->
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="20,0,20,20" Padding="5">
+            <ListView Grid.Row="2" x:Name="ListViewToDoLists" ItemsSource="{Binding ToDoLists}" ItemTemplate="{StaticResource ToDoListTemplate}" SelectionMode="Single" Margin="20,0,20,20">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal"/>
+                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Top"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>
-        </StackPanel>
+        </Border>
+
+
         <ContentControl x:Name="MainContent" />
     </Grid>
 </UserControl>

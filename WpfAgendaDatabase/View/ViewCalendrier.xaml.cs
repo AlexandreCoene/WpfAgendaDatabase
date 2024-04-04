@@ -58,5 +58,34 @@ namespace WpfAgendaDatabase.View
                 Console.WriteLine($"Erreur lors du chargement des événements: {ex.Message}");
             }
         }
+
+
+
+        private void Button_Click_Add_Event(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void Button_Click_Dell_Event(object sender, RoutedEventArgs e)
+        {
+            var selectedEvent = EventsListView.SelectedItem as Event;
+            if (selectedEvent != null)
+            {
+                var service = await DAO_GoogleCalendar.GetCalendarServiceAsync();
+                await DAO_GoogleCalendar.DeleteEventAsync(service, selectedEvent.Id);
+                Events.Remove(selectedEvent);
+
+                // Rafraîchissement de la liste des événements
+                Events.Clear();
+                LoadEventsAsync();
+            }
+        }
+
+
+
+        private void Button_Click_Modify_Event(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

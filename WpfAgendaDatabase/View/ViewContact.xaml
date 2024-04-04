@@ -5,41 +5,50 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfAgendaDatabase.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="900">
     <Grid Background="AliceBlue">
-        
-        <DataGrid Margin="20,71,20,20" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Identité}" x:Name="DataGridContacts" IsReadOnly="False" CellEditEnding="DataGridContacts_CellEditEnding">
+        <!-- Première ligne contenant les boutons et la barre de recherche -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <!-- Assurez-vous que ce StackPanel est placé au-dessus de votre DataGrid pour un agencement logique -->
+        <TextBlock Grid.Row="0" FontSize="24" FontWeight="Bold" Text="Contact :" TextDecorations="Underline" Padding="5" Margin="20,10,0,0" HorizontalAlignment="Left"/>
 
-            <DataGrid.Columns >
+
+
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="8" Margin="20">
+            <StackPanel Orientation="Horizontal" Margin="10">
+
+                <Button Content="Ajouter ➕" Margin="0,12,0,0" VerticalAlignment="Top" Width="95" Click="Button_Click_Ajouter" Style="{StaticResource GreenRoundedButtonStyle}"/>
+                <Button Content="Supprimer ➖" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click_Supprimer" Style="{StaticResource RedRoundedButtonStyle}"/>
+                <Button Content="Réseaux Sociaux 📡" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_Details" Style="{StaticResource BlueRoundedButtonStyle}"/>
+
+                <TextBox x:Name="SearchBox" Width="175" Margin="10,12,0,0" VerticalAlignment="Top" TextChanged="SearchBox_TextChanged" Height="21"/>
+                <Button Content="🔎" Click="Button_Click_Rechercher" Margin="10,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource DeepBlueSilverRoundedButtonStyle}"/>
+
+                <Button Content="Famille" Click="FilterByRelation_Click" Margin="10,12,0,0" VerticalAlignment="Top" Style="{StaticResource DeepBlueSilverRoundedButtonStyle}" Height="26" Width="63" />
+                <Button Content="Travail" Click="FilterByRelation_Click" Margin="10,12,0,0" VerticalAlignment="Top" Style="{StaticResource DeepBlueSilverRoundedButtonStyle}" Height="26" Width="62" />
+                <Button Content="Ami" Click="FilterByRelation_Click" Margin="10,12,0,0" VerticalAlignment="Top" Width="55" Style="{StaticResource DeepBlueSilverRoundedButtonStyle}" Height="26" />
+
+            </StackPanel>
+        </Border>
+            <!-- Deuxième ligne contenant la DataGrid -->
+        <DataGrid Grid.Row="2" Margin="20,10,20,20" BorderBrush="DarkSlateGray" BorderThickness="3" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Identité}" x:Name="DataGridContacts" IsReadOnly="False" CellEditEnding="DataGridContacts_CellEditEnding">
+            <DataGrid.Columns>
                 <DataGridTextColumn Header="#" Binding="{Binding Idtable1}" Width="20"/>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="100"/>
-                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width="100"/>
-                <DataGridTextColumn Header="Email Address" Binding="{Binding Email}" Width="150"/>
-                <DataGridTextColumn Header="Téléphone" Binding="{Binding Numero}" Width="150"/>
-                <DataGridTextColumn Header="Sexe" Binding="{Binding Sexe}" Width="150"/>
-                <DataGridTextColumn Header="Date de naissance" Binding="{Binding DateDeNaissance}" Width="150"/>
-                <DataGridTextColumn Header="Ville de naissance" Binding="{Binding VilleDeNaissance}" Width="150"/>
-                <DataGridTextColumn Header="Relation" Binding="{Binding Relation}" Width="150" />
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="90"/>
+                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width="90"/>
+                <DataGridTextColumn Header="Sexe" Binding="{Binding Sexe}" Width="50"/>
+                <DataGridTextColumn Header="Email Address" Binding="{Binding Email}" Width="170"/>
+                <DataGridTextColumn Header="Téléphone" Binding="{Binding Numero}" Width="110"/>
+                <DataGridTextColumn Header="Date de naissance" Binding="{Binding DateDeNaissance}" Width="120"/>
+                <DataGridTextColumn Header="Ville de naissance" Binding="{Binding VilleDeNaissance}" Width="130"/>
+                <DataGridTextColumn Header="Relation" Binding="{Binding Relation}" Width="120" />
                 <!-- Add more columns as necessary -->
             </DataGrid.Columns>
         </DataGrid>
-
-        <Button Content="Ajouter" HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Ajouter"/>
-        <Button Content="Supprimer" HorizontalAlignment="Left" Margin="116,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Supprimer"/>
-        <Button Content="Détails" HorizontalAlignment="Left" Margin="212,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Details"/>
-
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <TextBox x:Name="SearchBox" Width="200" Margin="300,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button Content="Rechercher" Click="Button_Click_Rechercher" Margin="5,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Ami" Click="FilterByRelation_Click" Margin="5,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top"  />
-                <Button Content="Famille" Click="FilterByRelation_Click" Margin="5,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <Button Content="Travail" Click="FilterByRelation_Click" Margin="5,10,10,400" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            </StackPanel>
-        </StackPanel>
-
         <ContentControl x:Name="MainContent" />
     </Grid>
 </UserControl>

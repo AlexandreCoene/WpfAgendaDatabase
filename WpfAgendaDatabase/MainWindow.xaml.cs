@@ -30,8 +30,11 @@ namespace WpfAgendaDatabase
             else
             {
                 MessageBox.Show("Database not connected");
-            }        
+            }
+            MainContent.Content = new ViewAccueil(); // Cette ligne charge ViewAccueil par défaut
         }
+
+
 
         private void BtnAccueil_Click(object sender, RoutedEventArgs e)
         {

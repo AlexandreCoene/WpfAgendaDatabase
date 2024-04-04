@@ -12,14 +12,14 @@
             <TextBox x:Name="NomTacheTextBox" Margin="10"/>
             <Label Content="Description de la tâche :" Margin="10"/>
             <TextBox x:Name="TipsTextBox" Margin="10"/>
-            <Button Content="Ajouter Tâche" Click="AjouterTache_Click" Margin="10"/>
+            <Button Content="Ajouter Tâche" Click="AjouterTache_Click" Margin="10" Style="{StaticResource GreenRoundedButtonStyle}"/>
             <ComboBox x:Name="ComboBoxTaches" DisplayMemberPath="Nom"
           ItemsSource="{Binding Taches}"
           Height="30" Width="200" Margin="10" />
 
             <!-- Bouton pour supprimer la tâche sélectionnée -->
             <Button x:Name="SupprimerTacheButton" Content="Supprimer la tâche" 
-                Click="SupprimerTache_Click" Height="30" Width="150" />
+                Click="SupprimerTache_Click" Height="30" Width="150" Style="{StaticResource RedRoundedButtonStyle}"/>
         </StackPanel>
     </Grid>
 </UserControl>

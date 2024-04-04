@@ -12,7 +12,7 @@ namespace WpfAgendaDatabase.Service.DAO
 {
     public class DAO_GoogleCalendar
     {
-        private static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
+        private static string[] Scopes = { CalendarService.Scope.Calendar };
         private static string ApplicationName = "WpfAgendaDatabase";
 
         // Méthode pour obtenir le service de calendrier
@@ -65,5 +65,23 @@ namespace WpfAgendaDatabase.Service.DAO
                 return new List<Google.Apis.Calendar.v3.Data.Event>();
             }
         }
+
+        public static async Task DeleteEventAsync(CalendarService service, string eventId)
+        {
+            try
+            {
+                await service.Events.Delete("primary", eventId).ExecuteAsync();
+            }
+            catch (Google.GoogleApiException ex) when (ex.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                Console.WriteLine($"L'événement avec l'ID {eventId} n'existe pas.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la suppression de l'événement: {ex.Message}");
+            }
+        }
+
+
     }
 }

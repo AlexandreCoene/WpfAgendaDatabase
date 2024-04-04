@@ -18,8 +18,33 @@
             </Border>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <ListView x:Name="EventsListView" ItemsSource="{Binding Events}" ItemTemplate="{StaticResource EventTemplate}" Margin="10">
+    <Grid Background="AliceBlue">
+        <!-- Définition des lignes de la grille -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Titre -->
+            <RowDefinition Height="Auto"/>
+            <!-- Boutons -->
+            <RowDefinition Height="*"/>
+            <!-- Liste des événements -->
+        </Grid.RowDefinitions>
+
+        <!-- Titre -->
+        <TextBlock Grid.Row="0" Text="Calendrier :" FontSize="24" FontWeight="Bold" TextDecorations="Underline" Padding="5" Margin="20,10,0,0" HorizontalAlignment="Left"/>
+
+        <!-- Boutons avec Bordure -->
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="8" Margin="20">
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
+                <Button Content="Ajouter ➕" Margin="0,12,0,0" VerticalAlignment="Top" Width="95" Style="{StaticResource GreenRoundedButtonStyle}" Click="Button_Click_Add_Event"/>
+                <Button Content="Supprimer ➖" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="110" Style="{StaticResource RedRoundedButtonStyle}" Click="Button_Click_Dell_Event"/>
+                <Button Content="Modifier" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="150" Style="{StaticResource BlueRoundedButtonStyle}" Click="Button_Click_Modify_Event"/>
+            </StackPanel>
+        </Border>
+        
+        
+
+        <!-- Liste des événements -->
+        <ListView Grid.Row="2" x:Name="EventsListView" ItemsSource="{Binding Events}" ItemTemplate="{StaticResource EventTemplate}" Margin="20,10,20,20">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>

@@ -8,7 +8,6 @@
             <GradientStop Color="#FF65758B" Offset="0"/>
             <GradientStop Color="#FF4B587A" Offset="1"/>
         </LinearGradientBrush>
-        <!-- Autres ressources, comme RoundedButtonStyle -->
 
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF65758B"/>
@@ -16,19 +15,17 @@
             <Setter Property="BorderBrush" Value="#FF4B587A"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Margin" Value="10"/>
-            
             <Setter Property="FontSize" Value="23"/>
-            <Setter Property="Template">    
+            <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="10" 
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Margin="{TemplateBinding Padding}"/>
-                           
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -39,12 +36,205 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <LinearGradientBrush x:Key="GreenGradientBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFA5D6A7" Offset="0"/>
+            <GradientStop Color="#FF4C9F50" Offset="1"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="GreenRoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource GreenGradientBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF3C6E47"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         
         
         
+        <!-- Dégradé de Rouge pour le Fond du Bouton -->
+        <LinearGradientBrush x:Key="RedGradientBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFF28585" Offset="0"/>
+            <!-- Rouge clair -->
+            <GradientStop Color="#FFD85757" Offset="1"/>
+            <!-- Rouge foncé -->
+        </LinearGradientBrush>
+
+        <!-- Style du Bouton Rouge Arrondi -->
+        <Style x:Key="RedRoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource RedGradientBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFB24C4C"/>
+            <!-- Rouge plus foncé pour la bordure -->
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                                <!-- Légèrement plus transparent au survol -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            
+        </Style>
+
+        <!-- Dégradé de Bleu pour le Fond du Bouton -->
+        <LinearGradientBrush x:Key="BlueGradientBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FF85D8F2" Offset="0"/>
+            <!-- Bleu clair -->
+            <GradientStop Color="#FF357ABD" Offset="1"/>
+            <!-- Bleu foncé -->
+        </LinearGradientBrush>
+
+        <!-- Style du Bouton Bleu Arrondi -->
+        <Style x:Key="BlueRoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BlueGradientBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF2C598A"/>
+            <!-- Bleu plus foncé pour la bordure -->
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                                <!-- Légèrement plus transparent au survol -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <LinearGradientBrush x:Key="DeepBlueSilverGradientBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FF1C3C5F" Offset="0"/>
+            <!-- Bleu profond -->
+            <GradientStop Color="#FFC0C0C0" Offset="1"/>
+            <!-- Argenté -->
+        </LinearGradientBrush>
+
+        <!-- Style du Bouton Bleu Profond / Argenté Arrondi -->
+        <Style x:Key="DeepBlueSilverRoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource DeepBlueSilverGradientBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF0E1F33"/>
+            <!-- Bleu profond pour la bordure -->
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                                <!-- Légèrement plus transparent au survol -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
-        
+        <!-- Styles pour le DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="AlternatingRowBackground" Value="#F3F3F3"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
+            <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FFDADADA"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEE"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         
     </Application.Resources>
-    
 </Application>

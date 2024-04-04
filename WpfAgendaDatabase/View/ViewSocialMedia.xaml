@@ -39,10 +39,12 @@
 
         <!-- Zone d'entrée pour le nom et l'URL du nouveau réseau social -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Label Content="Nom du réseau :" VerticalAlignment="Center" Margin="5"/>
             <TextBox x:Name="TextBoxSocialMediaName" Width="150" Margin="5"/>
+            <Label Content="Pseudo :" VerticalAlignment="Center" Margin="5"/>
             <TextBox x:Name="TextBoxSocialMediaUrl" Width="150" Margin="5"/>
-            <Button Content="Ajouter" Click="ButtonAddSocialMedia_Click" Margin="5"/>
-            <Button Content="Supprimer" Click="ButtonDeleteSocialMedia_Click" Margin="5"/>
+            <Button Content="Ajouter" Click="ButtonAddSocialMedia_Click" Margin="5" Width="90" Style="{StaticResource GreenRoundedButtonStyle}"/>
+            <Button Content="Supprimer" Click="ButtonDeleteSocialMedia_Click" Width="90" Margin="5" Style="{StaticResource RedRoundedButtonStyle}"/>
         </StackPanel>
     </Grid>
 </UserControl>
