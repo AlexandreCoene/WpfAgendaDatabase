@@ -12,12 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Controls;
 using WpfAgendaDatabase.Service.DAO;
 using Google.Apis.Calendar.v3.Data;
 using System.Collections.ObjectModel;
 using WpfAgendaDatabase.Service.API;
 using Google.Apis.Calendar.v3;
+using Google.Apis.Auth.OAuth2;
+using System.IO;
+using WpfAgendaDatabase.Agenda_AlexDB;
 
 namespace WpfAgendaDatabase.View
 {
@@ -59,12 +61,34 @@ namespace WpfAgendaDatabase.View
             }
         }
 
+        private void Button_Click_Modify_Event(object sender, RoutedEventArgs e)
+        {
+            // Obtenez l'événement sélectionné de la ListView.
+            var selectedEvent = EventsListView.SelectedItem as Event;
+
+            // Assurez-vous qu'un événement a été sélectionné.
+            if (selectedEvent == null)
+            {
+                MessageBox.Show("Veuillez sélectionner un événement à modifier.");
+                return;
+            }
+
+            // Créez la vue de modification et chargez l'événement sélectionné.
+            var viewModifierEvent = new ViewModifierEvent();
+            viewModifierEvent.LoadEvent(selectedEvent);
+
+            // Affichez la vue de modification dans le ContentControl principal.
+            MainContent.Content = viewModifierEvent;
+        }
 
 
         private void Button_Click_Add_Event(object sender, RoutedEventArgs e)
         {
 
+            MainContent.Content = new ViewAjouterEvent();
+             // Assurez-vous que c'est visible
         }
+
 
         private async void Button_Click_Dell_Event(object sender, RoutedEventArgs e)
         {
@@ -82,10 +106,22 @@ namespace WpfAgendaDatabase.View
         }
 
 
-
-        private void Button_Click_Modify_Event(object sender, RoutedEventArgs e)
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                string tokenPath = "token.json"; // ou le chemin d'accès où sont stockées les données de token
+                if (Directory.Exists(tokenPath))
+                {
+                    Directory.Delete(tokenPath, true);
+                    MessageBox.Show("Vous avez été déconnecté.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de la déconnexion : " + ex.Message);
+            }
         }
+
     }
 }

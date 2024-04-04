@@ -59,6 +59,7 @@ namespace WpfAgendaDatabase.View
 
         private void Button_Click_Details(object sender, RoutedEventArgs e)
         {
+            MainContent.Content = new ViewSocialMedia();
             var selectedContact = DataGridContacts.SelectedItem as Identite;
             if (selectedContact != null)
             {
