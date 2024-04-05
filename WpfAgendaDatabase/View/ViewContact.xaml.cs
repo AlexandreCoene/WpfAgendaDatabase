@@ -30,10 +30,10 @@ namespace WpfAgendaDatabase.View
         {
             InitializeComponent();
 
-            dAO_Contact = new DAO_Contact();
+            dAO_Contact = new DAO_Contact(); // Initialisation de DAO_Contact
 
-            LoadData();
-            this.DataContext = this;
+            LoadData(); 
+            this.DataContext = this; // Définition du contexte de données pour la ListView
         }
 
         private void LoadData()
@@ -43,24 +43,23 @@ namespace WpfAgendaDatabase.View
 
         private void Button_Click_Ajouter(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new ViewAjouter();
+            MainContent.Content = new ViewAjouter(); 
         }
 
         private void Button_Click_Supprimer(object sender, RoutedEventArgs e)
         {
-            var item = DataGridContacts.SelectedItem as Identite;
+            var item = DataGridContacts.SelectedItem as Identite; // L'élément sélectionné dans le DataGrid
             if (item != null)
             {
                 dAO_Contact.DeleteContact(item);
                 Identites.Remove(item);
-                // Pas besoin de réaffecter ItemsSource, la ObservableCollection s'en charge
             }
         }
 
         private void Button_Click_Details(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new ViewSocialMedia();
-            var selectedContact = DataGridContacts.SelectedItem as Identite;
+            var selectedContact = DataGridContacts.SelectedItem as Identite; // L'élément sélectionné dans le DataGrid
             if (selectedContact != null)
             {
                 var viewSocialMedia = new ViewSocialMedia();
@@ -69,56 +68,51 @@ namespace WpfAgendaDatabase.View
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner un contact pour voir les détails.", "Aucun contact sélectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Veuillez sélectionner un contact pour voir les détails.", "Aucun contact sélectionné", MessageBoxButton.OK, MessageBoxImage.Warning); // Gestion d'erreur
             }
         }
 
         private void Button_Click_Rechercher(object sender, RoutedEventArgs e)
         {
             var searchTerm = SearchBox.Text;
-            var filteredContacts = dAO_Contact.RechercherContacts(searchTerm);
-            Identites.Clear();
+            var filteredContacts = dAO_Contact.RechercherContacts(searchTerm); // Utilisez la méthode de recherche ici
+            Identites.Clear(); // Effacez les contacts actuels
             foreach (var contact in filteredContacts)
             {
                 Identites.Add(contact);
             }
-            DataGridContacts.ItemsSource = Identites; // Cette ligne peut être omise si Identites est déjà lié à ItemsSource dans XAML
+            DataGridContacts.ItemsSource = Identites;
         }
 
         private void FilterByRelation_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-           DAO_Contact dAO_Contact = new DAO_Contact();
-            var filteredContacts = dAO_Contact.GetContactsByRelation(button.Content.ToString());
+            Button button = sender as Button; // Le bouton cliqué
+           DAO_Contact dAO_Contact = new DAO_Contact(); // Initialisation de DAO_Contact
+            var filteredContacts = dAO_Contact.GetContactsByRelation(button.Content.ToString()); // Utilisez la méthode de filtrage ici
             Identites.Clear();
-            foreach (var contact in filteredContacts)
+            foreach (var contact in filteredContacts) // Ajoutez les contacts filtrés à la liste observable
             {
-                Identites.Add(contact);
+                Identites.Add(contact); // Ajoutez le contact à la liste observable
             }
-            DataGridContacts.ItemsSource = Identites; // Cette ligne peut être omise si Identites est déjà lié à ItemsSource dans XAML
+            DataGridContacts.ItemsSource = Identites;
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Obtenir le texte de recherche de l'utilisateur
-            var searchTerm = SearchBox.Text.Trim();
+            var searchTerm = SearchBox.Text.Trim(); // Le terme de recherche
 
-            // Filtrer les contacts basés sur le terme de recherche
-            if (!string.IsNullOrWhiteSpace(searchTerm))
+            if (!string.IsNullOrWhiteSpace(searchTerm)) 
             {
-                // Appel à la méthode de recherche de votre DAO
-                var filteredContacts = dAO_Contact.RechercherContacts(searchTerm);
+                var filteredContacts = dAO_Contact.RechercherContacts(searchTerm); // Utilise la méthode de recherche 
 
-                // Mise à jour de l'interface utilisateur avec les résultats filtrés
-                Identites.Clear();
-                foreach (var contact in filteredContacts)
+                Identites.Clear(); // Effacez les contacts actuels
+                foreach (var contact in filteredContacts) // Ajoute les contacts filtrés à la liste observable
                 {
-                    Identites.Add(contact);
+                    Identites.Add(contact); // Ajoute le contact à la liste observable
                 }
             }
             else
             {
-                // Ici, vous pouvez choisir de réinitialiser l'affichage ou de gérer un état vide
                 LoadData(); // Charger tous les contacts si le champ de recherche est vide
             }
         }
@@ -142,8 +136,7 @@ namespace WpfAgendaDatabase.View
                             var item = context.Identites.FirstOrDefault(i => i.Idtable1 == editedItem.Idtable1); // L'élément à modifier
                             if (item != null)
                             {
-                                // Reflection peut être utilisé ici pour rendre ce code plus générique, cela nécessite l'utilisation du nom de la propriété (bindingPath)
-                                if (bindingPath == "Nom") item.Nom = editedValue;
+                                if (bindingPath == "Nom") item.Nom = editedValue; // Modifier la propriété appropriée
                                 else if (bindingPath == "Prenom") item.Prenom = editedValue;
                                 else if (bindingPath == "Numero") item.Numero = editedValue;
                                 else if (bindingPath == "Email") item.Email = editedValue;

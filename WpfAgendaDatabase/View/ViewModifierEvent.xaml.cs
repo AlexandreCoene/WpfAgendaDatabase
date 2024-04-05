@@ -33,17 +33,19 @@ namespace WpfAgendaDatabase.View
 
         private void InitializeTimePickers()
         {
-            for (int hour = 0; hour < 24; hour++)
+            for (int hour = 0; hour < 24; hour++) // Afficher les heures dans la combobox (24 heures)
             {
                 StartHourEdit.Items.Add(hour.ToString("00"));
                 EndHourEdit.Items.Add(hour.ToString("00"));
             }
 
-            for (int minute = 0; minute < 60; minute += 5) // Incrémentation par 5 minutes
+            for (int minute = 0; minute < 60; minute += 5) // Incrémentation par 5 minutes pour les combobox
             {
                 StartMinuteEdit.Items.Add(minute.ToString("00"));
                 EndMinuteEdit.Items.Add(minute.ToString("00"));
             }
+
+            // Initialiser les combobox à 00:00
 
             StartHourEdit.SelectedIndex = 0;
             StartMinuteEdit.SelectedIndex = 0;
@@ -53,26 +55,26 @@ namespace WpfAgendaDatabase.View
 
         public void LoadEvent(Event eventToEdit)
         {
-            existingEvent = eventToEdit;
+            existingEvent = eventToEdit; // Stocker l'événement existant pour la mise à jour
 
-            // Update the UI with the event's data
-            EventTitleEdit.Text = existingEvent.Summary;
-            EventDescriptionEdit.Text = existingEvent.Description;
+            // Remplir les champs de l'interface utilisateur avec les valeurs de l'événement existant
+            EventTitleEdit.Text = existingEvent.Summary; 
+            EventDescriptionEdit.Text = existingEvent.Description; 
 
             if (existingEvent.Start.DateTime.HasValue)
             {
                 var start = existingEvent.Start.DateTime.Value;
-                StartDateEdit.SelectedDate = start;
-                StartHourEdit.SelectedValue = start.Hour.ToString("00");
-                StartMinuteEdit.SelectedValue = start.Minute.ToString("00");
+                StartDateEdit.SelectedDate = start; // Remplir la date de début
+                StartHourEdit.SelectedValue = start.Hour.ToString("00"); // Remplir l'heure de début
+                StartMinuteEdit.SelectedValue = start.Minute.ToString("00"); // Remplir les minutes de début
             }
 
             if (existingEvent.End.DateTime.HasValue)
             {
-                var end = existingEvent.End.DateTime.Value;
-                EndDateEdit.SelectedDate = end;
-                EndHourEdit.SelectedValue = end.Hour.ToString("00");
-                EndMinuteEdit.SelectedValue = end.Minute.ToString("00");
+                var end = existingEvent.End.DateTime.Value; 
+                EndDateEdit.SelectedDate = end; // Remplir la date de fin
+                EndHourEdit.SelectedValue = end.Hour.ToString("00"); // Remplir l'heure de fin
+                EndMinuteEdit.SelectedValue = end.Minute.ToString("00"); // Remplir les minutes de fin
             }
         }
 
@@ -98,8 +100,7 @@ namespace WpfAgendaDatabase.View
             existingEvent.Start.DateTime = startDate.Add(startTime);
             existingEvent.End.DateTime = endDate.Add(endTime);
 
-            // Vous devriez également définir le fuseau horaire si nécessaire
-            existingEvent.Start.TimeZone = "Europe/Paris"; // Par exemple: "America/Los_Angeles"
+            existingEvent.Start.TimeZone = "Europe/Paris"; // Définir le fuseau horaire
             existingEvent.End.TimeZone = "Europe/Paris";
 
             try

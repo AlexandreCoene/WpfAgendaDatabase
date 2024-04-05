@@ -25,13 +25,13 @@ namespace WpfAgendaDatabase.View
     {
 
         private DAO_ToDoList _daoToDoList;
-        public ObservableCollection<ToDoList> ToDoLists { get; private set; }
+        public ObservableCollection<ToDoList> ToDoLists { get; private set; } // Collection de ToDoLists
         public ViewToDoList()
         {
             InitializeComponent();
 
-            this.DataContext = this;
-            _daoToDoList = new DAO_ToDoList();
+            this.DataContext = this; // Définition du contexte de données pour la ListView
+            _daoToDoList = new DAO_ToDoList(); // Initialisation de DAO_ToDoList
             LoadToDoLists();
         }
 
@@ -66,8 +66,7 @@ namespace WpfAgendaDatabase.View
 
         private void ModifierToDoList_Click(object sender, RoutedEventArgs e)
         {
-            // ouvrir la view ajoutertask avec le toDoListId
-            var toDoListSelected = ListViewToDoLists.SelectedItem as ToDoList;
+            var toDoListSelected = ListViewToDoLists.SelectedItem as ToDoList;// Récupérer l'élément sélectionné
             if (toDoListSelected != null)
             {
                 // Vider le contenu actuel

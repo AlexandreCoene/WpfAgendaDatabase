@@ -42,6 +42,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Pour le titre -->
         <TextBlock Grid.Row="0" Text="To Do List :" FontSize="24" FontWeight="Bold" TextDecorations="Underline" Margin="20,10,20,0" HorizontalAlignment="Left"/>
 
         <!-- Boutons dans la deuxième ligne -->

@@ -31,17 +31,19 @@ namespace WpfAgendaDatabase.View
 
         private void InitializeTimePickers()
         {
-            for (int hour = 0; hour < 24; hour++)
+            for (int hour = 0; hour < 24; hour++) // Afficher les heures dans la combobox (24 heures)
             {
                 StartHourComboBox.Items.Add(hour.ToString("00"));
                 EndHourComboBox.Items.Add(hour.ToString("00"));
             }
 
-            for (int minute = 0; minute < 60; minute += 5) // Incrémentation par 5 minutes
+            for (int minute = 0; minute < 60; minute += 5) // Incrémentation par 5 minutes pour afficher les minutes dans les combobox
             {
                 StartMinuteComboBox.Items.Add(minute.ToString("00"));
                 EndMinuteComboBox.Items.Add(minute.ToString("00"));
             }
+
+            // Initialiser les combobox à 00:00
 
             StartHourComboBox.SelectedIndex = 0;
             StartMinuteComboBox.SelectedIndex = 0;
@@ -64,15 +66,15 @@ namespace WpfAgendaDatabase.View
             var endMinute = int.Parse((string)EndMinuteComboBox.SelectedItem);
             var endTime = new TimeSpan(endHour, endMinute, 0);
 
-            // Créez l'événement avec les informations collectées
-            var newEvent = new Event
+            var newEvent = new Event // Créez l'événement avec les informations collectées
             {
                 Summary = EventTitleTextBox.Text,
-                Description = EventDescriptionTextBox.Text, // Ajoutez ceci pour la description
+                Description = EventDescriptionTextBox.Text, 
                 Start = new EventDateTime() { DateTime = startDate.Add(startTime), TimeZone = "Europe/Paris" },
                 End = new EventDateTime() { DateTime = endDate.Add(endTime), TimeZone = "Europe/Paris" }
             };
 
+            // Gestion d'erreurs
 
             try
             {

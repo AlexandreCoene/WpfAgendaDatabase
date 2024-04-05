@@ -12,38 +12,39 @@ namespace WpfAgendaDatabase.Service.DAO
 {
     public class DAO_ToDoList
     {
-        private readonly AgendaAlexContext _context;
+        private readonly AgendaAlexContext _context; // Contexte de la base de données
 
         public DAO_ToDoList()
         {
-            _context = new AgendaAlexContext();
+            _context = new AgendaAlexContext(); // Initialisation du contexte
         }
 
-        public List<ToDoList> GetAllToDoLists()
+        //--------------------------------- ToDoList ---------------------------------//
+
+        public List<ToDoList> GetAllToDoLists() // Récupérer toutes les ToDoLists
         {
-            return _context.ToDoLists
-                .Include(tdl => tdl.Taches)
-                .ToList();
+            return _context.ToDoLists // Récupérer toutes les ToDoLists
+                .Include(tdl => tdl.Taches) // Inclure les Taches liées
+                .ToList(); // Récupérer la liste
         }
 
-        public void AddToDoList(ToDoList toDoList)
+        public void AddToDoList(ToDoList toDoList) // Ajouter une ToDoList
         {
             using (var context = new AgendaAlexContext())
             {
-                context.ToDoLists.Add(toDoList);
+                context.ToDoLists.Add(toDoList); 
                 context.SaveChanges();
             }
         }
 
-        public void UpdateToDoList(ToDoList toDoList)
+        public void UpdateToDoList(ToDoList toDoList) // Mettre à jour une ToDoList
         {
-            _context.ToDoLists.Update(toDoList);
+            _context.ToDoLists.Update(toDoList); 
             _context.SaveChanges();
         }
 
-        public void DeleteToDoList(int toDoListId)
+        public void DeleteToDoList(int toDoListId) // Supprimer une ToDoList
         {
-            // Find the toDoList with its related Taches
             var toDoList = _context.ToDoLists
                 .Include(tdl => tdl.Taches)
                 .FirstOrDefault(tdl => tdl.IdToDoList == toDoListId);
@@ -66,25 +67,25 @@ namespace WpfAgendaDatabase.Service.DAO
         //--------------------------------- Task ---------------------------------//
 
 
-        public void AddTask(Tache task)
+        public void AddTask(Tache task) // Ajouter une tâche
         {
             _context.Taches.Add(task);
             _context.SaveChanges();
         }
 
-        public List<Tache> GetTachesFromToDoList(int toDoListId)
+        public List<Tache> GetTachesFromToDoList(int toDoListId) // Récupérer les tâches d'une liste ToDoList
         {
             return _context.Taches
-                .Where(tache => tache.ToDoListIdToDoList == toDoListId)
-                .ToList();
+                .Where(tache => tache.ToDoListIdToDoList == toDoListId) // Filtrer par toDoListId
+                .ToList(); // Récupérer la liste de tâches
         }
 
-        public void DeleteTask(int taskId)
+        public void DeleteTask(int taskId) // Supprimer une tâche
         {
-            var taskToDelete = _context.Taches.FirstOrDefault(t => t.IdTasks == taskId);
+            var taskToDelete = _context.Taches.FirstOrDefault(t => t.IdTasks == taskId); // Récupérer la tâche à supprimer
             if (taskToDelete != null)
             {
-                _context.Taches.Remove(taskToDelete);
+                _context.Taches.Remove(taskToDelete); // Supprimer la tâche
                 _context.SaveChanges();
             }
         }

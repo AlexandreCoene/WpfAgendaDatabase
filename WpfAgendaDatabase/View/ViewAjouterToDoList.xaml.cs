@@ -28,13 +28,13 @@ namespace WpfAgendaDatabase.View
         public ViewAjouterToDoList()
         {
             InitializeComponent();
-            _daoToDoList = new DAO_ToDoList();
+            _daoToDoList = new DAO_ToDoList(); // Initialisation de DAO_ToDoList
         }
 
         private void AjouterTDL_Click(object sender, RoutedEventArgs e)
         {
-            var titre = textBoxTitre.Text;
-            var selectedDate = datePickerDate.SelectedDate;
+            var titre = textBoxTitre.Text; 
+            var selectedDate = datePickerDate.SelectedDate; 
 
             if (!string.IsNullOrEmpty(titre) && selectedDate.HasValue)
             {
@@ -44,12 +44,12 @@ namespace WpfAgendaDatabase.View
                 var toDoList = new ToDoList
                 {
                     Titre = titre,
-                    Date = formattedDate // Assurez-vous que ceci correspond au format attendu par votre base de données
+                    Date = formattedDate
                 };
 
                 _daoToDoList.AddToDoList(toDoList); // Utilisez la méthode d'ajout ici
 
-                // Affichez un message de confirmation ou fermez cette vue après l'ajout
+                // Affichez un message de confirmation et gestion d'erreur
                 MessageBox.Show("ToDoList ajoutée avec succès.");
 
                 textBoxTitre.Clear();

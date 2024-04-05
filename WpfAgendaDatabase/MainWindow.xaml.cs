@@ -34,8 +34,6 @@ namespace WpfAgendaDatabase
             MainContent.Content = new ViewAccueil(); // Cette ligne charge ViewAccueil par défaut
         }
 
-
-
         private void BtnAccueil_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new ViewAccueil(); // Changez simplement le contenu de MainContent
@@ -55,7 +53,5 @@ namespace WpfAgendaDatabase
         {
             MainContent.Content = new ViewToDoList();
         }
-
-        // Ajoutez d'autres méthodes de gestion des clics si nécessaire.
     }
 }

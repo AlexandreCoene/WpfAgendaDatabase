@@ -30,14 +30,14 @@ namespace WpfAgendaDatabase.View
         public ViewAjouterTask(int toDoListId)
         {
             InitializeComponent();
-            _toDoListId = toDoListId;
+            _toDoListId = toDoListId; // Initialisation de l'ID de la liste ToDoList
 
-            _daoToDoList = new DAO_ToDoList();
+            _daoToDoList = new DAO_ToDoList(); // Initialisation de DAO_ToDoList
 
-            ChargerTaches();
+            ChargerTaches(); // Chargez les tâches de la liste ToDoList
 
             _taches = new ObservableCollection<Tache>(/* Chargez les tâches ici depuis le DAO */);
-            this.DataContext = this;
+            this.DataContext = this; // Définition du contexte de données pour la ComboBox
         }
 
         private void AjouterTache_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace WpfAgendaDatabase.View
                     Nom = nomTache,
                     Tips = tips,
                     ToDoListIdToDoList = _toDoListId,
-                    Check = 0 // supposons 0 pour non-coché
+                    Check = 0 // 0 pour non-coché
                 };
 
                 var daoToDoList = new DAO_ToDoList();
@@ -62,11 +62,11 @@ namespace WpfAgendaDatabase.View
                 // Afficher une boîte de dialogue de confirmation
                 MessageBox.Show("La tâche a bien été ajoutée.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Effacer les TextBoxes
+                // Effacer le contenu des TextBoxes
                 NomTacheTextBox.Clear();
                 TipsTextBox.Clear();
 
-                // Optionnel : Mettre à jour la liste de tâches dans l'interface utilisateur
+                // Mettre à jour la liste de tâches dans l'interface utilisateur
                 _taches.Add(task);
             }
             else
@@ -78,19 +78,20 @@ namespace WpfAgendaDatabase.View
 
         private void ChargerTaches()
         {
-            // Supposons que DAO_ToDoList a une méthode pour obtenir toutes les tâches pour une ToDoList spécifique
-            var taches = _daoToDoList.GetTachesFromToDoList(_toDoListId);
-            _taches = new ObservableCollection<Tache>(taches);
-            ComboBoxTaches.ItemsSource = _taches;
+            var taches = _daoToDoList.GetTachesFromToDoList(_toDoListId); // Chargez les tâches de la liste ToDoList
+            _taches = new ObservableCollection<Tache>(taches); // Créez une ObservableCollection à partir de la liste de tâches
+            ComboBoxTaches.ItemsSource = _taches; // Définissez la source de données de la ComboBox
         }
 
         private void SupprimerTache_Click(object sender, RoutedEventArgs e)
         {
-            var selectedTask = (Tache)ComboBoxTaches.SelectedItem;
+            var selectedTask = (Tache)ComboBoxTaches.SelectedItem; // Récupérer la tâche sélectionnée
             if (selectedTask != null)
             {
-                _daoToDoList.DeleteTask(selectedTask.IdTasks);
-                _taches.Remove(selectedTask);
+                _daoToDoList.DeleteTask(selectedTask.IdTasks); // Supprimer la tâche de la base de données
+                _taches.Remove(selectedTask); // Supprimer la tâche de la liste observable  
+
+                // Gestion d'erreur
                 MessageBox.Show("La tâche a bien été supprimée.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else

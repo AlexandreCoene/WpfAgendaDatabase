@@ -4,11 +4,14 @@
              xmlns:local="clr-namespace:WpfAgendaDatabase"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
+        <!-- Dégradé de Gris pour le Fond du Bouton -->
         <LinearGradientBrush x:Key="MyGradientBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#FF65758B" Offset="0"/>
             <GradientStop Color="#FF4B587A" Offset="1"/>
         </LinearGradientBrush>
 
+        <!-- Style du Bouton Arrondi -->
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF65758B"/>
             <Setter Property="Foreground" Value="White"/>
@@ -37,11 +40,13 @@
             </Setter>
         </Style>
 
+        <!-- Dégradé de Vert pour le Fond du Bouton -->
         <LinearGradientBrush x:Key="GreenGradientBackground" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#FFA5D6A7" Offset="0"/>
             <GradientStop Color="#FF4C9F50" Offset="1"/>
         </LinearGradientBrush>
-
+       
+        <!-- Style du Bouton Vert Arrondi -->
         <Style x:Key="GreenRoundedButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource GreenGradientBackground}"/>
             <Setter Property="Foreground" Value="White"/>
@@ -76,9 +81,7 @@
         <!-- Dégradé de Rouge pour le Fond du Bouton -->
         <LinearGradientBrush x:Key="RedGradientBackground" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#FFF28585" Offset="0"/>
-            <!-- Rouge clair -->
             <GradientStop Color="#FFD85757" Offset="1"/>
-            <!-- Rouge foncé -->
         </LinearGradientBrush>
 
         <!-- Style du Bouton Rouge Arrondi -->
@@ -86,11 +89,10 @@
             <Setter Property="Background" Value="{StaticResource RedGradientBackground}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#FFB24C4C"/>
-            <!-- Rouge plus foncé pour la bordure -->
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="FontSize" Value="14"/>
-            
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -105,22 +107,17 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Opacity" Value="0.85"/>
-                                <!-- Légèrement plus transparent au survol -->
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
-            
         </Style>
 
         <!-- Dégradé de Bleu pour le Fond du Bouton -->
         <LinearGradientBrush x:Key="BlueGradientBackground" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#FF85D8F2" Offset="0"/>
-            <!-- Bleu clair -->
             <GradientStop Color="#FF357ABD" Offset="1"/>
-            <!-- Bleu foncé -->
         </LinearGradientBrush>
 
         <!-- Style du Bouton Bleu Arrondi -->
@@ -128,7 +125,6 @@
             <Setter Property="Background" Value="{StaticResource BlueGradientBackground}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#FF2C598A"/>
-            <!-- Bleu plus foncé pour la bordure -->
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="FontSize" Value="14"/>
@@ -146,7 +142,6 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Opacity" Value="0.85"/>
-                                <!-- Légèrement plus transparent au survol -->
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -156,9 +151,7 @@
 
         <LinearGradientBrush x:Key="DeepBlueSilverGradientBackground" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#FF1C3C5F" Offset="0"/>
-            <!-- Bleu profond -->
             <GradientStop Color="#FFC0C0C0" Offset="1"/>
-            <!-- Argenté -->
         </LinearGradientBrush>
 
         <!-- Style du Bouton Bleu Profond / Argenté Arrondi -->
@@ -166,7 +159,6 @@
             <Setter Property="Background" Value="{StaticResource DeepBlueSilverGradientBackground}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#FF0E1F33"/>
-            <!-- Bleu profond pour la bordure -->
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="FontSize" Value="14"/>
@@ -184,7 +176,6 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Opacity" Value="0.85"/>
-                                <!-- Légèrement plus transparent au survol -->
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -235,6 +226,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
+        <!-- Style pour les Labels -->
 
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="Calibri"/>
@@ -249,7 +242,7 @@
             </Setter>
         </Style>
 
-        <!-- Nouveau style pour les TextBox -->
+        <!-- Style pour les TextBox -->
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Calibri"/>
             <Setter Property="FontSize" Value="14"/>

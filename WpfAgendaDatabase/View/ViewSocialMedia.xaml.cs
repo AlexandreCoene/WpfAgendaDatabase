@@ -33,20 +33,19 @@ namespace WpfAgendaDatabase.View
 
         public void SetSelectedContact(Identite contact)
         {
-            SelectedContact = contact;
-            LoadSocialMediaProfiles();
+            SelectedContact = contact; // Définir l'identité sélectionnée   
+            LoadSocialMediaProfiles(); // Chargez les profils sociaux pour l'identité sélectionnée
         }
 
         private void LoadSocialMediaProfiles()
         {
-            // Supposons que vous avez une méthode dans DAO_Contact pour obtenir les profils sociaux
-            var socialProfiles = new DAO_Contact().GetSocialProfiles(SelectedContact.Idtable1);
+            var socialProfiles = new DAO_Contact().GetSocialProfiles(SelectedContact.Idtable1); // Obtenez les profils sociaux pour l'identité sélectionnée
             ListViewSocialMedia.ItemsSource = socialProfiles;
         }
 
         private void ButtonAddSocialMedia_Click(object sender, RoutedEventArgs e)
         {
-            string socialMediaName = TextBoxSocialMediaName.Text;
+            string socialMediaName = TextBoxSocialMediaName.Text; // Obtenez le nom du réseau social
             string socialMediaUrl = TextBoxSocialMediaUrl.Text;
 
             if (!string.IsNullOrWhiteSpace(socialMediaName) && SelectedContact != null)
@@ -57,13 +56,12 @@ namespace WpfAgendaDatabase.View
                 {
                     // L'ID de SocialMedia sera rempli après la sauvegarde
                     IdentitéIdtable1 = SelectedContact.Idtable1
-                    // Plus de propriétés si nécessaire
                 };
 
                 // Ajoutez le nouveau SocialMedium et sauvegardez pour générer l'ID
                 new DAO_Contact().AddSocialProfil(newProfile, newSocialMedia);
 
-                // Rafraîchir l'interface utilisateur, etc.
+                // Rafraîchir l'interface utilisateur
                 LoadSocialMediaProfiles();
             }
         }
@@ -73,11 +71,9 @@ namespace WpfAgendaDatabase.View
             var selectedSocialProfile = ListViewSocialMedia.SelectedItem as SocialProfil;
             if (selectedSocialProfile != null)
             {
-                // DAO pour accéder à la base de données
-                var daoContact = new DAO_Contact();
+                var daoContact = new DAO_Contact(); // DAO pour accéder à la base de données
                 daoContact.DeleteSocialProfile(selectedSocialProfile);
 
-                // Mettre à jour l'affichage en enlevant le profil de la ListView
                 LoadSocialMediaProfiles(); // Rechargez les profils pour mettre à jour la liste
             }
             else

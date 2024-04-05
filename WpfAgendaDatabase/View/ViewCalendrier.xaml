@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <DataTemplate x:Key="EventTemplate">
+        <DataTemplate x:Key="EventTemplate"> <!--Ressource permettant de définir le template d'affichage des événements-->
             <Border Background="#88C6E7" Padding="10" Margin="5" CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
                 <StackPanel>
                     <TextBlock Text="{Binding Summary}" FontWeight="Bold" FontSize="16"/>
@@ -20,14 +20,10 @@
     </UserControl.Resources>
 
     <Grid Background="AliceBlue">
-        <!-- Définition des lignes de la grille -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Titre -->
             <RowDefinition Height="Auto"/>
-            <!-- Boutons -->
             <RowDefinition Height="*"/>
-            <!-- Liste des événements -->
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -45,12 +41,13 @@
                 <Button Content="Modifier Evènement" Margin="10,5,0,0" VerticalAlignment="Top" Width="155" Style="{StaticResource BlueRoundedButtonStyle}" Click="Button_Click_Modify_Event" Height="40"/>
             </StackPanel>
         </Border>
-
+        
+        <!-- Bouton de déconnexion -->
         <StackPanel Orientation="Horizontal" Margin="0,5,10,0" HorizontalAlignment="Right" Width="125">
             <Button Content="Déconnexion " Name="LogoutButton" Click="LogoutButton_Click" Style="{StaticResource DeepBlueSilverRoundedButtonStyle}" Height="40" Width="110"/>
         </StackPanel>
 
-        <!-- Liste des événements -->
+        <!-- Liste des événements dynamique -->
         <Border Grid.Row="2" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="5" Margin="20,5,20,20">
             <ListView x:Name="EventsListView" ItemsSource="{Binding Events}" ItemTemplate="{StaticResource EventTemplate}">
                 <ListView.ItemsPanel>
@@ -61,6 +58,8 @@
             </ListView>
         </Border>
 
+        <!--MainContents (conteneur)-->
+        
         <ContentControl Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" x:Name="MainContent"/>
     </Grid>
 </UserControl>

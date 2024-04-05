@@ -6,14 +6,14 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Threading;
-using WpfAgendaDatabase.Service.API; // Si vos modèles sont dans cet espace de noms
+using WpfAgendaDatabase.Service.API; 
 
 namespace WpfAgendaDatabase.Service.DAO
 {
     public class DAO_GoogleCalendar
     {
-        private static string[] Scopes = { CalendarService.Scope.Calendar };
-        private static string ApplicationName = "WpfAgendaDatabase";
+        private static string[] Scopes = { CalendarService.Scope.Calendar }; // Étendue de l'API Google Calendar
+        private static string ApplicationName = "WpfAgendaDatabase"; // Nom de l'application
 
         // Méthode pour obtenir le service de calendrier
         public static async Task<CalendarService> GetCalendarServiceAsync()
@@ -27,7 +27,7 @@ namespace WpfAgendaDatabase.Service.DAO
                 Scopes,
                 "user",
                 CancellationToken.None,
-                new FileDataStore("token.json", true));
+                new FileDataStore("token.json", true)); // Stockez les jetons d'accès dans un fichier
 
             var service = new CalendarService(new BaseClientService.Initializer()
             {
@@ -44,35 +44,35 @@ namespace WpfAgendaDatabase.Service.DAO
             // Assurez-vous que le service est déjà initialisé
             if (service == null)
             {
-                throw new ArgumentNullException(nameof(service), "Le service de calendrier n'est pas initialisé.");
+                throw new ArgumentNullException(nameof(service), "Le service de calendrier n'est pas initialisé."); // Gestion des erreurs
             }
 
-            EventsResource.ListRequest request = service.Events.List("primary");
-            request.TimeMin = DateTime.Now;
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
-            request.MaxResults = 10;
-            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+            EventsResource.ListRequest request = service.Events.List("primary"); // Obtenez les événements de l'agenda principal
+            request.TimeMin = DateTime.Now; 
+            request.ShowDeleted = false; 
+            request.SingleEvents = true; 
+            request.MaxResults = 10; // Limiter le nombre d'événements à 10
+            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime; // Trier les événements par heure de début
 
             try
             {
-                var events = await request.ExecuteAsync();
-                return events.Items.ToList();
+                var events = await request.ExecuteAsync(); // Exécutez la requête pour obtenir les événements
+                return events.Items.ToList(); // Retourne la liste des événements
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return new List<Google.Apis.Calendar.v3.Data.Event>();
+                Console.WriteLine(ex.Message); // Affichez l'erreur dans la console
+                return new List<Google.Apis.Calendar.v3.Data.Event>(); // Retourne une liste vide en cas d'erreur
             }
         }
 
-        public static async Task DeleteEventAsync(CalendarService service, string eventId)
+        public static async Task DeleteEventAsync(CalendarService service, string eventId) // Méthode pour supprimer un événement
         {
             try
             {
-                await service.Events.Delete("primary", eventId).ExecuteAsync();
+                await service.Events.Delete("primary", eventId).ExecuteAsync(); // Supprimez l'événement avec l'ID spécifié
             }
-            catch (Google.GoogleApiException ex) when (ex.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
+            catch (Google.GoogleApiException ex) when (ex.HttpStatusCode == System.Net.HttpStatusCode.NotFound) // Gestion des erreurs 404
             {
                 Console.WriteLine($"L'événement avec l'ID {eventId} n'existe pas.");
             }

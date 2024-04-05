@@ -25,38 +25,37 @@ namespace WpfAgendaDatabase.View
 {
     public partial class ViewCalendrier : UserControl
     {
-        public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
+        public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>(); // Liste des événements
 
 
         public ViewCalendrier()
         {
             InitializeComponent();
-            this.DataContext = this;
-            LoadEventsAsync();
+            this.DataContext = this; // Définition du contexte de données pour la ListView
+            LoadEventsAsync(); // Chargez les événements depuis le service Google Calendar
         }
 
         private async void LoadEventsAsync()
         {
             try
             {
-                var service = await DAO_GoogleCalendar.GetCalendarServiceAsync();
-                var request = service.Events.List("primary");
+                var service = await DAO_GoogleCalendar.GetCalendarServiceAsync(); // Obtenez le service Google Calendar
+                var request = service.Events.List("primary"); // Obtenez les événements de l'agenda principal
                 request.TimeMin = DateTime.Now;
                 request.ShowDeleted = false;
                 request.SingleEvents = true;
                 request.MaxResults = 10;
                 request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
-                var events = await request.ExecuteAsync();
+                var events = await request.ExecuteAsync(); // Exécutez la requête pour obtenir les événements
 
-                foreach (var eventItem in events.Items)
+                foreach (var eventItem in events.Items) // Ajoute chaque evenement a la liste
                 {
                     Events.Add(eventItem);
                 }
             }
             catch (Exception ex)
             {
-                // Gérer l'erreur, par exemple en affichant un message
                 Console.WriteLine($"Erreur lors du chargement des événements: {ex.Message}");
             }
         }
@@ -66,7 +65,7 @@ namespace WpfAgendaDatabase.View
             // Obtenez l'événement sélectionné de la ListView.
             var selectedEvent = EventsListView.SelectedItem as Event;
 
-            // Assurez-vous qu'un événement a été sélectionné.
+            // Verification qu'un événement a été sélectionné.
             if (selectedEvent == null)
             {
                 MessageBox.Show("Veuillez sélectionner un événement à modifier.");
@@ -84,19 +83,17 @@ namespace WpfAgendaDatabase.View
 
         private void Button_Click_Add_Event(object sender, RoutedEventArgs e)
         {
-
             MainContent.Content = new ViewAjouterEvent();
-             // Assurez-vous que c'est visible
         }
 
 
         private async void Button_Click_Dell_Event(object sender, RoutedEventArgs e)
         {
-            var selectedEvent = EventsListView.SelectedItem as Event;
-            if (selectedEvent != null)
+            var selectedEvent = EventsListView.SelectedItem as Event; // Obtenez l'événement sélectionné
+            if (selectedEvent != null) // Vérifiez si un événement a été sélectionné
             {
-                var service = await DAO_GoogleCalendar.GetCalendarServiceAsync();
-                await DAO_GoogleCalendar.DeleteEventAsync(service, selectedEvent.Id);
+                var service = await DAO_GoogleCalendar.GetCalendarServiceAsync(); // Obtenez le service Google Calendar
+                await DAO_GoogleCalendar.DeleteEventAsync(service, selectedEvent.Id); // Suppression de l'événement
                 Events.Remove(selectedEvent);
 
                 // Rafraîchissement de la liste des événements
@@ -110,7 +107,7 @@ namespace WpfAgendaDatabase.View
         {
             try
             {
-                string tokenPath = "token.json"; // ou le chemin d'accès où sont stockées les données de token
+                string tokenPath = "token.json"; // Token de connexion, si supprimer l'utilisatuer est déconnecté
                 if (Directory.Exists(tokenPath))
                 {
                     Directory.Delete(tokenPath, true);

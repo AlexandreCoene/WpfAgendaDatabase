@@ -13,4 +13,5 @@ namespace WpfAgendaDatabase.Service.DAO
     internal class DAO_Accueil
     {
     }
+    // Classe pour les statistiques
 }
