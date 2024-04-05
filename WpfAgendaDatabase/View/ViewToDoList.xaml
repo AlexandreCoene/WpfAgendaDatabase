@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <DataTemplate x:Key="ToDoListTemplate">
-            <Border Background="Yellow" Padding="10" Margin="5" CornerRadius="5" BorderBrush="DarkGray" BorderThickness="2">
+            <Border Background="#FFFB00" Padding="10" Margin="5" CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
                 <StackPanel>
                     <TextBlock Text="{Binding Titre}" FontWeight="Bold"/>
                     <TextBlock Text="{Binding Date}" FontStyle="Italic"/>
@@ -45,11 +45,11 @@
         <TextBlock Grid.Row="0" Text="To Do List :" FontSize="24" FontWeight="Bold" TextDecorations="Underline" Margin="20,10,20,0" HorizontalAlignment="Left"/>
 
         <!-- Boutons dans la deuxième ligne -->
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="20,10,20,10" Padding="5">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Ajouter ToDoList ➕" Margin="5" Width="150" Click="AjouterToDoList_Click" Style="{StaticResource GreenRoundedButtonStyle}"/>
-                <Button Content="Supprimer ToDoList ➖" Margin="5" Width="165" Click="SupprimerToDoList_Click" Style="{StaticResource RedRoundedButtonStyle}" />
-                <Button Content="Modifier ToDoList" Margin="5" Width="140" Click="ModifierToDoList_Click" Style="{StaticResource BlueRoundedButtonStyle}"/>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="20,10,20,10" Padding="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="Ajouter ToDoList ➕" Margin="10" Width="160" Height="40" Click="AjouterToDoList_Click" Style="{StaticResource GreenRoundedButtonStyle}"/>
+                <Button Content="Supprimer ToDoList ➖" Margin="10" Width="165" Height="40" Click="SupprimerToDoList_Click" Style="{StaticResource RedRoundedButtonStyle}" />
+                <Button Content="Modifier ToDoList" Margin="10" Width="140" Height="40" Click="ModifierToDoList_Click" Style="{StaticResource BlueRoundedButtonStyle}"/>
             </StackPanel>
         </Border>
 

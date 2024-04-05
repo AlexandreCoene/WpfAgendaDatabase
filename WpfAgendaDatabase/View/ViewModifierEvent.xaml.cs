@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfAgendaDatabase.Service.DAO;
+using WpfAgendaDatabase.Agenda_AlexDB;
 
 namespace WpfAgendaDatabase.View
 {

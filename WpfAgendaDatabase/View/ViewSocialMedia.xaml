@@ -13,20 +13,22 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Réseaux Sociaux" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0"/>
+        <Label FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0">
+            <TextBlock Text="Réseaux Sociaux :" FontSize="18" TextDecorations="Underline"/>
+        </Label>
 
         <!-- ListView avec GridView -->
         <ListView Grid.Row="1" x:Name="ListViewSocialMedia" Margin="10">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nom du Réseau" Width="150">
+                    <GridViewColumn Header="Nom du Réseau :" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding SocialMediaIdSocialMediaNavigation.Name}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="URL" Width="250">
+                    <GridViewColumn Header="Pseudo :" Width="250">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding SocialMediaIdSocialMediaNavigation.Url}" TextDecorations="Underline" Foreground="Blue"/>
@@ -43,8 +45,8 @@
             <TextBox x:Name="TextBoxSocialMediaName" Width="150" Margin="5"/>
             <Label Content="Pseudo :" VerticalAlignment="Center" Margin="5"/>
             <TextBox x:Name="TextBoxSocialMediaUrl" Width="150" Margin="5"/>
-            <Button Content="Ajouter" Click="ButtonAddSocialMedia_Click" Margin="5" Width="90" Style="{StaticResource GreenRoundedButtonStyle}"/>
-            <Button Content="Supprimer" Click="ButtonDeleteSocialMedia_Click" Width="90" Margin="5" Style="{StaticResource RedRoundedButtonStyle}"/>
+            <Button Content="Ajouter ➕" Click="ButtonAddSocialMedia_Click" Margin="5" Width="93" Style="{StaticResource GreenRoundedButtonStyle}" Height="32"/>
+            <Button Content="Supprimer ➖" Click="ButtonDeleteSocialMedia_Click" Width="107" Margin="5" Style="{StaticResource RedRoundedButtonStyle}" Height="32"/>
         </StackPanel>
     </Grid>
 </UserControl>

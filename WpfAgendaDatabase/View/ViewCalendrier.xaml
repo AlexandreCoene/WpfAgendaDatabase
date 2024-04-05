@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <DataTemplate x:Key="EventTemplate">
-            <Border Background="#FFFDE7" Padding="10" Margin="5" CornerRadius="5" BorderBrush="Gray" BorderThickness="1">
+            <Border Background="#88C6E7" Padding="10" Margin="5" CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
                 <StackPanel>
                     <TextBlock Text="{Binding Summary}" FontWeight="Bold" FontSize="16"/>
                     <TextBlock Text="{Binding Start.DateTime, StringFormat='dd/MM/yyyy HH:mm'}" FontStyle="Italic" Margin="0,5,0,0"/>
@@ -38,26 +38,28 @@
         <TextBlock Grid.Row="0" Text="Calendrier :" FontSize="24" FontWeight="Bold" TextDecorations="Underline" Padding="5" Margin="20,10,0,0" HorizontalAlignment="Left"/>
 
         <!-- Boutons avec Bordure -->
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="8" Margin="20">
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="8" Margin="20,10">
             <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-                <Button Content="Ajouter ➕" Margin="0,12,0,0" VerticalAlignment="Top" Width="95" Style="{StaticResource GreenRoundedButtonStyle}" Click="Button_Click_Add_Event"/>
-                <Button Content="Supprimer ➖" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="110" Style="{StaticResource RedRoundedButtonStyle}" Click="Button_Click_Dell_Event"/>
-                <Button Content="Modifier" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="150" Style="{StaticResource BlueRoundedButtonStyle}" Click="Button_Click_Modify_Event"/>
+                <Button Content="Ajouter ➕" Margin="0,5,0,0" VerticalAlignment="Top" Width="100" Style="{StaticResource GreenRoundedButtonStyle}" Click="Button_Click_Add_Event" Height="40"/>
+                <Button Content="Supprimer ➖" Margin="10,5,0,0" VerticalAlignment="Top" Width="117" Style="{StaticResource RedRoundedButtonStyle}" Click="Button_Click_Dell_Event" Height="40"/>
+                <Button Content="Modifier Evènement" Margin="10,5,0,0" VerticalAlignment="Top" Width="155" Style="{StaticResource BlueRoundedButtonStyle}" Click="Button_Click_Modify_Event" Height="40"/>
             </StackPanel>
         </Border>
 
-        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
-            <Button Content="Déconnexion" Name="LogoutButton" Click="LogoutButton_Click" />
+        <StackPanel Orientation="Horizontal" Margin="0,5,10,0" HorizontalAlignment="Right" Width="125">
+            <Button Content="Déconnexion " Name="LogoutButton" Click="LogoutButton_Click" Style="{StaticResource DeepBlueSilverRoundedButtonStyle}" Height="40" Width="110"/>
         </StackPanel>
 
         <!-- Liste des événements -->
-        <ListView Grid.Row="2" x:Name="EventsListView" ItemsSource="{Binding Events}" ItemTemplate="{StaticResource EventTemplate}" Margin="20,10,20,20">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="5" Margin="20,5,20,20">
+            <ListView x:Name="EventsListView" ItemsSource="{Binding Events}" ItemTemplate="{StaticResource EventTemplate}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Border>
 
         <ContentControl Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" x:Name="MainContent"/>
     </Grid>

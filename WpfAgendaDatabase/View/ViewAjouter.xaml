@@ -8,30 +8,63 @@
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid Background="White">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel>
-                <Label Content="Nom :" Margin="5"/>
-                <TextBox x:Name="TB_Nom" Margin="5" ToolTip="Entrez le nom"/>
-                <Label Content="Prénom :" Margin="5"/>
-                <TextBox x:Name="TB_Prenom" Margin="5" ToolTip="Entrez le prénom"/>
-                <Label Content="Numéro de téléphone :" Margin="5"/>
-                <TextBox x:Name="TB_Numero" Margin="5" ToolTip="Entrez le numéro de téléphone"/>
-                <Label Content="Email :" Margin="5"/>
-                <TextBox x:Name="TB_Email" Margin="5" ToolTip="Entrez l'email"/>
-                <Label Content="Sexe : (M ou F)" Margin="5"/>
-                <TextBox x:Name="TB_Sexe" Margin="5" ToolTip="Entrez le sexe"/>
-                <Label Content="Date de naissance :" Margin="5"/>
-                <Calendar x:Name="Cal_DateDeNaissance" Margin="10" ToolTip="Sélectionnez la date de naissance" HorizontalAlignment="Left"/>
-                <Label Content="Ville de naissance :" Margin="5"/>
-                <TextBox x:Name="TB_VilleDeNaissance" Margin="5" ToolTip="Entrez la ville de naissance"/>
-                <Label Content="Catégorie :" Margin="5"/>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <CheckBox x:Name="CB_Famille" Content="Famille" Margin="5"/>
-                    <CheckBox x:Name="CB_Ami" Content="Ami" Margin="5"/>
-                    <CheckBox x:Name="CB_Travail" Content="Travail" Margin="5"/>
-                </StackPanel>
-                <Button Content="Ajouter" Click="Ajouter_Click" Margin="5" Style="{StaticResource GreenRoundedButtonStyle}"/>
-            </StackPanel>
+                <!-- Première colonne avec bordure -->
+                <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="5">
+                    <StackPanel>
+                        <Label Margin="5" FontSize="20" FontWeight="Bold">
+                            <TextBlock Text="Ajouter un Contact : " TextDecorations="Underline"/>
+                        </Label>
+
+                        <Label Content="Nom :" Margin="5"/>
+                        <TextBox x:Name="TB_Nom" Margin="5" ToolTip="Entrez le nom"/>
+
+                        <Label Content="Prénom :" Margin="5"/>
+                        <TextBox x:Name="TB_Prenom" Margin="5" ToolTip="Entrez le prénom"/>
+
+                        <Label Content="Ville de naissance :" Margin="5"/>
+                        <TextBox x:Name="TB_VilleDeNaissance" Margin="5" ToolTip="Entrez la ville de naissance"/>
+
+                        <Label Content="Date de naissance :" Margin="5"/>
+                        <Calendar x:Name="Cal_DateDeNaissance" Margin="10" ToolTip="Sélectionnez la date de naissance" HorizontalAlignment="Left"/>
+                        
+                    </StackPanel>
+                </Border>
+
+                <!-- Deuxième colonne avec bordure -->
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="5">
+                    <StackPanel>
+
+                        <Label Content="" Margin="5"/>
+
+                        <Label Content="Numéro de téléphone :" Margin="5"/>
+                        <TextBox x:Name="TB_Numero" Margin="5" ToolTip="Entrez le numéro de téléphone"/>
+
+                        <Label Content="Email :" Margin="5"/>
+                        <TextBox x:Name="TB_Email" Margin="5" ToolTip="Entrez l'email"/>
+
+                        <Label Content="Sexe : (M ou F)" Margin="5"/>
+                        <TextBox x:Name="TB_Sexe" Margin="5" ToolTip="Entrez le sexe"/>
+
+                        <Label Content="Relation :" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <CheckBox x:Name="CB_Famille" Content="Famille" Margin="5"/>
+                            <CheckBox x:Name="CB_Ami" Content="Ami" Margin="5"/>
+                            <CheckBox x:Name="CB_Travail" Content="Travail" Margin="5"/>
+                        </StackPanel>
+
+                        <Button Content="Ajouter ➕" Click="Ajouter_Click" Margin="5,10,5,5" HorizontalAlignment="Center" Style="{StaticResource GreenRoundedButtonStyle}" Height="31" Width="368"/>
+
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
         </ScrollViewer>
     </Grid>
 </UserControl>

@@ -5,40 +5,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfAgendaDatabase.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="LightCoral" Margin="10">
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid Background="AliceBlue" Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Modifier le titre de l'événement:" Margin="0,10"/>
-        <TextBox Grid.Row="1" x:Name="EventTitleEdit" Margin="0,10" />
+        <!-- Bordure pour le titre -->
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="2" Margin="10" CornerRadius="5">
+            <Label FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+                <TextBlock Text="Modifier un Événement :" TextDecorations="Underline"/>
+            </Label>
+        </Border>
 
-        <TextBlock Grid.Row="2" Text="Modifier la date et heure de début:" Margin="0,10"/>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10">
-            <DatePicker x:Name="StartDateEdit"/>
-            <ComboBox x:Name="StartHourEdit" Width="60" Margin="10,0,0,0"/>
-            <ComboBox x:Name="StartMinuteEdit" Width="60" Margin="5,0,0,0"/>
-        </StackPanel>
+        <!-- Bordure pour le reste des données -->
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" Margin="10" CornerRadius="5" Padding="10">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="4" Text="Modifier la date et heure de fin:" Margin="0,10"/>
-        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10">
-            <DatePicker x:Name="EndDateEdit"/>
-            <ComboBox x:Name="EndHourEdit" Width="60" Margin="10,0,0,0"/>
-            <ComboBox x:Name="EndMinuteEdit" Width="60" Margin="5,0,0,0"/>
-        </StackPanel>
+                <Label Grid.Row="0" Content="Modifier le titre de l'événement:" Margin="10,5"/>
+                <TextBox Grid.Row="1" x:Name="EventTitleEdit" Margin="10,0"/>
 
-        <TextBlock Grid.Row="6" Text="Modifier la description de l'événement:" Margin="0,10"/>
-        <TextBox Grid.Row="7" x:Name="EventDescriptionEdit" Margin="0,10" TextWrapping="Wrap" AcceptsReturn="True" Height="100" VerticalScrollBarVisibility="Auto"/>
+                <Label Grid.Row="2" Content="Modifier la date et heure de début:" Margin="10,5"/>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,0">
+                    <DatePicker x:Name="StartDateEdit"/>
+                    <ComboBox x:Name="StartHourEdit" Width="60" Margin="10,0,0,0"/>
+                    <ComboBox x:Name="StartMinuteEdit" Width="60" Margin="5,0,0,0"/>
+                </StackPanel>
 
-        <Button Grid.Row="8" Content="Enregistrer les modifications" Click="SaveModifiedEventButton_Click" Margin="0,10"/>
+                <Label Grid.Row="4" Content="Modifier la date et heure de fin:" Margin="10,5"/>
+                <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="10,0">
+                    <DatePicker x:Name="EndDateEdit"/>
+                    <ComboBox x:Name="EndHourEdit" Width="60" Margin="10,0,0,0"/>
+                    <ComboBox x:Name="EndMinuteEdit" Width="60" Margin="5,0,0,0"/>
+                </StackPanel>
+
+                <Label Grid.Row="6" Content="Modifier la description de l'événement:" Margin="10,5"/>
+                <TextBox Grid.Row="7" x:Name="EventDescriptionEdit" Margin="10,0" TextWrapping="Wrap" AcceptsReturn="True" Height="100" VerticalScrollBarVisibility="Auto"/>
+
+                <Button Grid.Row="8" Content="Enregistrer les modifications ✔️" Click="SaveModifiedEventButton_Click" Margin="10,20" Height="40" Style="{StaticResource GreenRoundedButtonStyle}"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

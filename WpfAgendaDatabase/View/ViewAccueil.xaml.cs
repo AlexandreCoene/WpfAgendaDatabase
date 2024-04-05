@@ -27,31 +27,32 @@ namespace WpfAgendaDatabase.View
         public ViewAccueil()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel();
+            this.DataContext = new ViewModel(); // Définition du contexte de données pour le graphique
             SetupDateTimeDisplay();
 
         }
 
-        private void SetupDateTimeDisplay()
+        //-------------------------------------- Horloge / Date -------------------------------------------------//
+
+        private void SetupDateTimeDisplay() // Méthode pour afficher la date et l'heure actuelle
         {
-            DispatcherTimer timer = new DispatcherTimer();
+            DispatcherTimer timer = new DispatcherTimer(); // Création d'un nouveau timer
             timer.Interval = TimeSpan.FromSeconds(1); // Mise à jour chaque seconde
-            timer.Tick += Timer_Tick;
-            timer.Start();
+            timer.Tick += Timer_Tick; // Appel de la méthode Timer_Tick à chaque tick
+            timer.Start(); // Démarrage du timer
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e) // Méthode pour mettre à jour l'heure
         {
-            // Formattez la date et l'heure comme vous le souhaitez ici
-            DateTimeDisplay.Text = DateTime.Now.ToString("G");
+            DateTimeDisplay.Text = DateTime.Now.ToString("G"); // Affichage de la date et de l'heure actuelle
         }
     }
 
-    
+    //-------------------------------------- Graphique -------------------------------------------------//
 
     public class ViewModel
     {
-        public SeriesCollection MySeries { get; set; }
+        public SeriesCollection MySeries { get; set; } 
 
         public ViewModel()
         {

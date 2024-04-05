@@ -10,9 +10,13 @@
         <Label Content="Accueil" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="60" FontWeight="Bold" Margin="0,163,0,0"/>
         <Label Content="Bienvenue sur l'application de gestion de votre agenda" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,238,0,0" FontSize="20" FontWeight="DemiBold"/>
         <TextBlock x:Name="DateTimeDisplay" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,280,0,0" FontSize="20"/>
+        
+        <!--Graphique de productivité-->
+        
         <!--<StackPanel Margin="10">
             <TextBlock Text="Votre Analyse de Productivité" FontWeight="Bold" FontSize="16"/>
             <lvc:CartesianChart Series="{Binding MySeries}"/>
         </StackPanel>-->
+        
     </Grid>
 </UserControl>
