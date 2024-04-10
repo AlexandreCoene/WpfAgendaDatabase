@@ -90,5 +90,15 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
+        public void UpdateTaskCheckStatus(int taskId, bool isChecked)
+        {
+            var taskToUpdate = _context.Taches.FirstOrDefault(t => t.IdTasks == taskId);
+            if (taskToUpdate != null)
+            {
+                taskToUpdate.Check = isChecked;
+                _context.SaveChanges();
+            }
+        }
+
     }
 }

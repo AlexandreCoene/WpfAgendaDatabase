@@ -18,7 +18,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold"/>
+                                    <CheckBox IsChecked="{Binding Check, Mode=TwoWay}" Content="{Binding Nom}" FontWeight="Bold" Checked="CheckBox_Checked"/>
                                     <TextBlock Text="{Binding Tips}" FontStyle="Italic" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </DataTemplate>

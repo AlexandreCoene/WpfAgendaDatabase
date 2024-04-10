@@ -77,5 +77,18 @@ namespace WpfAgendaDatabase.View
             }
 
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox != null && checkBox.DataContext is Tache)
+            {
+                var tache = checkBox.DataContext as Tache;
+
+                // Mettre à jour le statut de la tâche dans la base de données
+                _daoToDoList.UpdateTaskCheckStatus(tache.IdTasks, checkBox.IsChecked ?? false);
+            }
+        }
+
     }
 }

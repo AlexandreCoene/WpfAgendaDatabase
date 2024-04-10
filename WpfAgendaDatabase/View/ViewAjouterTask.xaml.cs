@@ -53,7 +53,7 @@ namespace WpfAgendaDatabase.View
                     Nom = nomTache,
                     Tips = tips,
                     ToDoListIdToDoList = _toDoListId,
-                    Check = 0 // 0 pour non-coché
+                    // Check = 0 // 0 pour non-coché
                 };
 
                 var daoToDoList = new DAO_ToDoList();

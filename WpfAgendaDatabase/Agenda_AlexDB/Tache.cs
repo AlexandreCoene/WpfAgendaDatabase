@@ -11,7 +11,7 @@ public partial class Tache
 
     public string? Tips { get; set; }
 
-    public sbyte? Check { get; set; }
+    public bool Check { get; set; }
 
     public int ToDoListIdToDoList { get; set; }
 
