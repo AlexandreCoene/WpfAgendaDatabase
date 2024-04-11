@@ -29,12 +29,21 @@ namespace WpfAgendaDatabase.Service.DAO
             }
         }
 
-        public List<Identite> LoadAllContacts_Status() // Charger tous les contacts avec leur statut
+        public List<Identite> LoadAllContacts_Status()
         {
-            using (var context = new AgendaAlexContext())
+            try
             {
-                var allcont = context.Identites.Include(c => c.Statuses).ToList();
-                return allcont;
+                using (var context = new AgendaAlexContext())
+                {
+                    var allcont = context.Identites.Include(c => c.Statuses).ToList();
+                    return allcont;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérer l'erreur, journaliser, envoyer des notifications, etc.
+                Console.WriteLine("Une erreur s'est produite lors du chargement des contacts : " + ex.Message);
+                return null; // Ou une autre action en cas d'erreur
             }
         }
 

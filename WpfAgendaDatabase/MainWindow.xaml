@@ -24,24 +24,27 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!-- Titre -->
                 <TextBlock Text="Agenda Personnel :" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" TextDecorations="Underline"/>
 
                 <!-- Boutons pour changer la vue -->
-                <Button Content="Accueil 🏠" Grid.Row="1" Margin="10" Click="BtnAccueil_Click" Style="{StaticResource RoundedButtonStyle}"/>
-                <Button Content="Calendrier 🗓️" Grid.Row="2" Margin="10" Click="BtnCalendrier_Click" Style="{StaticResource RoundedButtonStyle}" />
-                <Button Content="Contact ☎️" Grid.Row="3" Margin="10" Click="BtnContact_Click" Style="{StaticResource RoundedButtonStyle}"/>
-                <Button Content="To Do List 📜" Grid.Row="4" Margin="10" Click="BtnGestion_Click" Style="{StaticResource RoundedButtonStyle}"/>
-                
+                <Button Content="Accueil 🏠" Grid.Row="1" Margin="10" Click="BtnAccueil_Click" Style="{StaticResource RoundedButtonStyle}" Name="BtnAccueil"/>
+                <Button Content="Calendrier 🗓️" Grid.Row="2" Margin="10" Click="BtnCalendrier_Click" Style="{StaticResource RoundedButtonStyle}" Name="BtnCalendrier"/>
+                <Button Content="Contact ☎️" Grid.Row="3" Margin="10" Click="BtnContact_Click" Style="{StaticResource RoundedButtonStyle}" Name="BtnContact"/>
+                <Button Content="To Do List 📜" Grid.Row="4" Margin="10" Click="BtnGestion_Click" Style="{StaticResource RoundedButtonStyle}" Name="BtnGestion"/>
+                <Button Content="Paramètres ⚙️" Grid.Row="5" Margin="10" Click="BtnParametre_Click" Style="{StaticResource RoundedButtonStyle}" Name="BtnParametre"/>
+
                 <!-- Texte de fin -->
-                <TextBlock Text="By : Alexandre Coene" Grid.Row="5" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="LightGray" Margin="0,19,0,0"/>
-                <TextBlock Text="VF Agenda" Grid.Row="5" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="LightGray" Margin="0,51,0,0"/>
+                <TextBlock Text="By : Alexandre Coene" Grid.Row="6" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="LightGray" Margin="0,19,0,0"/>
+                <TextBlock Text="VF Agenda" Grid.Row="6" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="LightGray" Margin="0,51,0,0"/>
             </Grid>
         </Border>
         
         <!-- Conteneur (Vide), qui va contenir les vues -->
         <ContentControl x:Name="MainContent" Grid.Column="1" Background="#EEE"/>
+        
     </Grid>
 </Window>

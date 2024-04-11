@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
@@ -29,8 +30,25 @@ public partial class AgendaAlexContext : DbContext
     public virtual DbSet<ToDoList> ToDoLists { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;port=3306;user=root;database=agenda_alex", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.2.0-mysql"));
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            string host = ConfigurationManager.AppSettings["host"];
+            string port = ConfigurationManager.AppSettings["port"];
+            string user = ConfigurationManager.AppSettings["user"];
+            string password = ConfigurationManager.AppSettings["password"];
+            string database = ConfigurationManager.AppSettings["database"];
+            string mysqlVer = ConfigurationManager.AppSettings["mysqlVer"];
+
+
+            string connectionString = $"server={host};port=3306;user={user};password={password};database={database}";
+            optionsBuilder.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse(mysqlVer));
+        }
+    }
+
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    ////#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseMySql("server=localhost;port=3306;user=root;database=agenda_alex", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.2.0-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

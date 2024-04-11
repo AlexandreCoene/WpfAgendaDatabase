@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="WpfAgendaDatabase.View.ViewParametre"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfAgendaDatabase.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Parametre" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Grid.Row="0"/>
+
+        <TextBlock Text="Nom de la base de données" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="200" Grid.Row="1" x:Name="TB_Nom_BDD"/>
+
+        <TextBlock Text="Adresse IP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Grid.Row="2"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="200" Grid.Row="2" x:Name="TB_IP_BDD"/>
+
+        <TextBlock Text="Nom de l'utilisateur" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Grid.Row="3"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="200" Grid.Row="3" x:Name="TB_Nom_Utilisateur"/>
+
+        <TextBlock Text="Mot de passe" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Grid.Row="4"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="200" Grid.Row="4" x:Name="TB_MDP_BDD"/>
+        <Button Content="Valider" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Width="200" Grid.Row="5" Click="Button_Click_Valider_Parametre"/>
+
+        <ContentControl x:Name="MainContent" Grid.Column="1" Background="#EEE"/>
+    </Grid>
+</UserControl>

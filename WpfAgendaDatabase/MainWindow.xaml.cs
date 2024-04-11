@@ -30,8 +30,21 @@ namespace WpfAgendaDatabase
             else
             {
                 MessageBox.Show("Database not connected");
+                DisableButtons();
             }
             MainContent.Content = new ViewAccueil(); // Cette ligne charge ViewAccueil par défaut
+        }
+
+        private void DisableButtons()
+        {
+            //BtnCalendrier.IsEnabled = false;
+            //BtnCalendrier.Opacity = 0.5;
+
+            //BtnContact.IsEnabled = false;
+            //BtnContact.Opacity = 0.5;
+
+            //BtnGestion.IsEnabled = false;
+            //BtnGestion.Opacity = 0.5;    
         }
 
         private void BtnAccueil_Click(object sender, RoutedEventArgs e)
@@ -52,6 +65,11 @@ namespace WpfAgendaDatabase
         private void BtnGestion_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new ViewToDoList();
+        }
+
+        private void BtnParametre_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ViewParametre();
         }
     }
 }
