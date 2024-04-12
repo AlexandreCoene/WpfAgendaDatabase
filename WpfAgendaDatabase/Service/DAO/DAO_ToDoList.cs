@@ -21,12 +21,22 @@ namespace WpfAgendaDatabase.Service.DAO
 
         //--------------------------------- ToDoList ---------------------------------//
 
-        public List<ToDoList> GetAllToDoLists() // Récupérer toutes les ToDoLists
+        public List<ToDoList> GetAllToDoLists()
         {
-            return _context.ToDoLists // Récupérer toutes les ToDoLists
-                .Include(tdl => tdl.Taches) // Inclure les Taches liées
-                .ToList(); // Récupérer la liste
+            try
+            {
+                return _context.ToDoLists
+                               .Include(tdl => tdl.Taches)
+                               .ToList();
+            }
+            catch (Exception ex)
+            {
+                // Gérer l'erreur ici, par exemple, en enregistrant dans un journal, en renvoyant une liste vide ou en lançant une nouvelle exception
+                Console.WriteLine($"Impossible de récupérer les To Do List : {ex.Message}");
+                return new List<ToDoList>(); // Renvoyer une liste vide en cas d'erreur
+            }
         }
+
 
         public void AddToDoList(ToDoList toDoList) // Ajouter une ToDoList
         {

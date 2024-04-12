@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfAgendaDatabase.Modele;
 
 namespace WpfAgendaDatabase.View
 {
@@ -21,34 +22,25 @@ namespace WpfAgendaDatabase.View
     /// </summary>
     public partial class ViewParametre : UserControl
     {
+        BDD_Manager bDD_Manager;
         public ViewParametre()
         {
             InitializeComponent();
-            TB_Nom_BDD.Text = "agenda_alex";
-            TB_IP_BDD.Text = "localhost";
-            TB_Nom_Utilisateur.Text = "root";
-            TB_MDP_BDD.Text = "";
+            bDD_Manager = new BDD_Manager();
+
         }
 
         private void Button_Click_Valider_Parametre(object sender, RoutedEventArgs e)
         {
-            string ServerName = TB_IP_BDD.Text;
-            string Username = TB_Nom_Utilisateur.Text;
-            string Password = TB_MDP_BDD.Text;
-            string Database = TB_Nom_BDD.Text;
 
+            bDD_Manager.host = TB_IP_BDD.Text;
+            bDD_Manager.user = TB_Nom_Utilisateur.Text;
+            bDD_Manager.password = TB_MDP_BDD.Text;
+            bDD_Manager.database = TB_Nom_BDD.Text;
 
+            bDD_Manager.Save_BDD_Settings();
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["host"].Value = ServerName;
-            config.AppSettings.Settings["user"].Value = Username;
-            config.AppSettings.Settings["password"].Value = Password;
-            config.AppSettings.Settings["database"].Value = Database;
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");
-
-            MainContent.Content = new ViewAccueil(); 
+            MessageBox.Show("Paramètres enregistrés");
         }
     }
 }

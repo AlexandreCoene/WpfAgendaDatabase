@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
+using WpfAgendaDatabase.Modele;
 
 namespace WpfAgendaDatabase.Agenda_AlexDB;
 
 public partial class AgendaAlexContext : DbContext
 {
+    BDD_Manager bDD_Manager;
+
+
     public AgendaAlexContext()
     {
+      bDD_Manager = new BDD_Manager();
     }
 
     public AgendaAlexContext(DbContextOptions<AgendaAlexContext> options)
@@ -33,16 +38,16 @@ public partial class AgendaAlexContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            string host = ConfigurationManager.AppSettings["host"];
-            string port = ConfigurationManager.AppSettings["port"];
-            string user = ConfigurationManager.AppSettings["user"];
-            string password = ConfigurationManager.AppSettings["password"];
-            string database = ConfigurationManager.AppSettings["database"];
-            string mysqlVer = ConfigurationManager.AppSettings["mysqlVer"];
+            //string host = ConfigurationManager.AppSettings["host"];
+            //string port = ConfigurationManager.AppSettings["port"];
+            //string user = ConfigurationManager.AppSettings["user"];
+            //string password = ConfigurationManager.AppSettings["password"];
+            //string database = ConfigurationManager.AppSettings["database"];
+            //string mysqlVer = ConfigurationManager.AppSettings["mysqlVer"];
 
 
-            string connectionString = $"server={host};port=3306;user={user};password={password};database={database}";
-            optionsBuilder.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse(mysqlVer));
+            //string connectionString = $"server={host};port=3306;user={user};password={password};database={database}";
+            optionsBuilder.UseMySql(bDD_Manager.connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse(bDD_Manager.mysqlVer));
         }
     }
 
